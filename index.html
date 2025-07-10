@@ -849,140 +849,224 @@
 
     <script>
         // 현재 페이지 상태 관리
-        const pageState = {
-            'goryeo-joseon': { current: 1, total: 3 },
-            'buddha': { current: 1, total: 3 },
-            'hongshan-relics': { current: 1, total: 3 },
-            'arhat': { current: 1, total: 3 },
-            'woodcraft': { current: 1, total: 3 },
-            'metal': { current: 1, total: 3 },
-            'pottery': { current: 1, total: 3 },
-            'hongshan-text': { current: 1, total: 3 },
-            'ceramic-brick': { current: 1, total: 3 }
-        };
+const pageState = {
+    'goryeo-joseon': { current: 1, total: 7 }, // 99개 이미지 = 7페이지
+    'buddha': { current: 1, total: 3 },
+    'hongshan-relics': { current: 1, total: 3 },
+    'arhat': { current: 1, total: 3 },
+    'woodcraft': { current: 1, total: 3 },
+    'metal': { current: 1, total: 3 },
+    'pottery': { current: 1, total: 3 },
+    'hongshan-text': { current: 1, total: 3 },
+    'ceramic-brick': { current: 1, total: 3 }
+};
 
-        // 현재 활성 카테고리 추적
-        let currentCategory = null;
+// 현재 활성 카테고리 추적
+let currentCategory = null;
 
-        // 메인 페이지 표시
-        function showMainPage() {
-            // 모든 카테고리 페이지 숨기기
-            document.querySelectorAll('.category-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            // 메인 페이지 표시
-            document.getElementById('main-page').style.display = 'block';
-            
-            // 네비게이션 메뉴 활성화 해제
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            currentCategory = null;
-            scrollToTop();
-        }
+// 메인 페이지 표시
+function showMainPage() {
+    // 모든 카테고리 페이지 숨기기
+    document.querySelectorAll('.category-page').forEach(page => {
+        page.classList.remove('active');
+    });
+    // 메인 페이지 표시
+    document.getElementById('main-page').style.display = 'block';
+    
+    // 네비게이션 메뉴 활성화 해제
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    currentCategory = null;
+    scrollToTop();
+}
 
-        // 카테고리 페이지 표시
-        function showCategory(category) {
-            // 메인 페이지 숨기기
-            document.getElementById('main-page').style.display = 'none';
-            
-            // 모든 카테고리 페이지 숨기기
-            document.querySelectorAll('.category-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // 선택된 카테고리 페이지 표시
-            document.getElementById(category + '-page').classList.add('active');
-            
-            // 네비게이션 메뉴 활성화
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            currentCategory = category;
-            
-            // 갤러리 초기화
-            initializeGallery(category);
-            scrollToTop();
-        }
+// 카테고리 페이지 표시
+function showCategory(category) {
+    // 메인 페이지 숨기기
+    document.getElementById('main-page').style.display = 'none';
+    
+    // 모든 카테고리 페이지 숨기기
+    document.querySelectorAll('.category-page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // 선택된 카테고리 페이지 표시
+    document.getElementById(category + '-page').classList.add('active');
+    
+    // 네비게이션 메뉴 활성화
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    currentCategory = category;
+    
+    // 갤러리 초기화
+    initializeGallery(category);
+    scrollToTop();
+}
 
-        // 갤러리 초기화
-        function initializeGallery(category) {
-            pageState[category].current = 1;
-            updateGallery(category);
-        }
+// 갤러리 초기화
+function initializeGallery(category) {
+    pageState[category].current = 1;
+    updateGallery(category);
+}
 
-        // 갤러리 업데이트
-        function updateGallery(category) {
-            const gallery = document.getElementById(category + '-gallery');
-            const currentPage = pageState[category].current;
-            const totalPages = pageState[category].total;
+// 갤러리 업데이트
+function updateGallery(category) {
+    const gallery = document.getElementById(category + '-gallery');
+    const currentPage = pageState[category].current;
+    const totalPages = pageState[category].total;
+    
+    gallery.innerHTML = '';
+    const startIndex = (currentPage - 1) * 16;
+    
+    // 카테고리별 이미지 설정
+    if (category === 'goryeo-joseon') {
+        // 고려청자·조선백자 카테고리 (99개 이미지)
+        for (let i = 1; i <= 16; i++) {
+            const imageIndex = startIndex + i;
+            const imageDiv = document.createElement('div');
+            imageDiv.className = 'image-placeholder';
             
-            // 갤러리 내용 생성 (16개씩, 4x4 그리드)
-            gallery.innerHTML = '';
-            const startIndex = (currentPage - 1) * 16;
-            
-            for (let i = 1; i <= 16; i++) {
-                const imageIndex = startIndex + i;
-                const imageDiv = document.createElement('div');
-                imageDiv.className = 'image-placeholder';
-                imageDiv.innerHTML = `소장예물 ${imageIndex}<br>(이미지 링크)`;
-                gallery.appendChild(imageDiv);
+            if (imageIndex <= 99) { // 99개 이미지 범위 내
+                const imageNumber = String(imageIndex).padStart(3, '0'); // 001, 002, 003 형식
+                const imagePath = `./images/Goryeo_celadon_Korean_white_porchlain/CQ${imageNumber}.jpg`;
+                
+                imageDiv.innerHTML = `
+                    <img src="${imagePath}" 
+                         alt="고려청자·조선백자 ${imageIndex}" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                         onclick="openImageModal(this.src, this.alt)">
+                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+                        이미지 로딩 실패<br>📷<br>CQ${imageNumber}
+                    </div>
+                `;
+            } else {
+                // 빈 슬롯 (7페이지의 경우 마지막에 3개만 표시)
+                imageDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
+                        -
+                    </div>
+                `;
             }
             
-            // 페이지 정보 업데이트
-            document.getElementById(category + '-info').textContent = `${currentPage} / ${totalPages}`;
-            
-            // 버튼 상태 업데이트
-            document.getElementById(category + '-prev').disabled = currentPage === 1;
-            document.getElementById(category + '-next').disabled = currentPage === totalPages;
+            gallery.appendChild(imageDiv);
         }
-
-        // 이전 페이지
-        function prevPage(category) {
-            if (pageState[category].current > 1) {
-                pageState[category].current--;
-                updateGallery(category);
-                scrollToGallery();
-            }
+    } else {
+        // 다른 카테고리들 (기존 코드 유지)
+        for (let i = 1; i <= 16; i++) {
+            const imageIndex = startIndex + i;
+            const imageDiv = document.createElement('div');
+            imageDiv.className = 'image-placeholder';
+            imageDiv.innerHTML = `소장예물 ${imageIndex}<br>(이미지 준비중)`;
+            gallery.appendChild(imageDiv);
         }
+    }
+    
+    // 페이지 정보 업데이트
+    document.getElementById(category + '-info').textContent = `${currentPage} / ${totalPages}`;
+    
+    // 버튼 상태 업데이트
+    document.getElementById(category + '-prev').disabled = currentPage === 1;
+    document.getElementById(category + '-next').disabled = currentPage === totalPages;
+}
 
-        // 다음 페이지
-        function nextPage(category) {
-            if (pageState[category].current < pageState[category].total) {
-                pageState[category].current++;
-                updateGallery(category);
-                scrollToGallery();
-            }
+// 이미지 모달 기능
+function openImageModal(src, alt) {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0,0,0,0.8); z-index: 1000; display: flex; 
+        align-items: center; justify-content: center; cursor: pointer;
+        padding: 20px; box-sizing: border-box;
+    `;
+    
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = alt;
+    img.style.cssText = `
+        max-width: 100%; max-height: 100%; border-radius: 10px; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: default;
+        object-fit: contain;
+    `;
+    
+    const closeBtn = document.createElement('div');
+    closeBtn.innerHTML = '✕';
+    closeBtn.style.cssText = `
+        position: absolute; top: 30px; right: 30px; color: white; 
+        font-size: 2rem; cursor: pointer; background: rgba(0,0,0,0.5); 
+        width: 40px; height: 40px; border-radius: 50%; display: flex; 
+        align-items: center; justify-content: center; font-weight: bold;
+    `;
+    
+    modal.appendChild(img);
+    modal.appendChild(closeBtn);
+    document.body.appendChild(modal);
+    
+    // 클릭으로 닫기 (이미지 제외)
+    modal.onclick = (e) => {
+        if (e.target === modal || e.target === closeBtn) {
+            modal.remove();
         }
-
-        // 갤러리로 스크롤
-        function scrollToGallery() {
-            document.querySelector('.image-gallery').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+    };
+    
+    // ESC 키로 닫기
+    const handleEsc = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', handleEsc);
         }
+    };
+    document.addEventListener('keydown', handleEsc);
+}
 
-        // 맨 위로 스크롤
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
+// 이전 페이지
+function prevPage(category) {
+    if (pageState[category].current > 1) {
+        pageState[category].current--;
+        updateGallery(category);
+        scrollToGallery();
+    }
+}
 
-        // 페이지 로드 시 메인 페이지 표시
-        document.addEventListener('DOMContentLoaded', function() {
-            showMainPage();
-        });
+// 다음 페이지
+function nextPage(category) {
+    if (pageState[category].current < pageState[category].total) {
+        pageState[category].current++;
+        updateGallery(category);
+        scrollToGallery();
+    }
+}
 
-        // 뒤로가기 버튼 처리
-        window.addEventListener('popstate', function(event) {
-            showMainPage();
-        });
+// 갤러리로 스크롤
+function scrollToGallery() {
+    document.querySelector('.image-gallery').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+}
+
+// 맨 위로 스크롤
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 페이지 로드 시 메인 페이지 표시
+document.addEventListener('DOMContentLoaded', function() {
+    showMainPage();
+});
+
+// 뒤로가기 버튼 처리
+window.addEventListener('popstate', function(event) {
+    showMainPage();
+});
     </script>
 </body>
 </html>
