@@ -853,7 +853,7 @@ const pageState = {
     'goryeo-joseon': { current: 1, total: 7 },    // 99개 이미지 = 7페이지
     'buddha': { current: 1, total: 2 },           // 24개 이미지 = 2페이지  
     'hongshan-relics': { current: 1, total: 2 },  // 20개 이미지 = 2페이지
-    'arhat': { current: 1, total: 3 },
+    'arhat': { current: 1, total: 2 },            // 18개 이미지 = 2페이지
     'woodcraft': { current: 1, total: 3 },
     'metal': { current: 1, total: 3 },
     'pottery': { current: 1, total: 3 },
@@ -1001,8 +1001,8 @@ function updateGallery(category) {
             const imageDiv = document.createElement('div');
             imageDiv.className = 'image-placeholder';
             
-            if (imageIndex <= 20) { // 20개 이미지 범위 내
-                const imageNumber = String(imageIndex).padStart(3, '0'); // 001, 002, 003 형식
+            if (imageIndex <= 20) {
+                const imageNumber = String(imageIndex).padStart(3, '0');
                 const imagePath = `./images/Hongsan_culture/HS${imageNumber}.jpg`;
                 
                 imageDiv.innerHTML = `
@@ -1016,7 +1016,38 @@ function updateGallery(category) {
                     </div>
                 `;
             } else {
-                // 빈 슬롯 (2페이지의 경우 4개만 표시)
+                imageDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
+                        -
+                    </div>
+                `;
+            }
+            
+            gallery.appendChild(imageDiv);
+        }
+    } else if (category === 'arhat') {
+        // 18나한 카테고리 (18개 이미지)
+        for (let i = 1; i <= 16; i++) {
+            const imageIndex = startIndex + i;
+            const imageDiv = document.createElement('div');
+            imageDiv.className = 'image-placeholder';
+            
+            if (imageIndex <= 18) { // 18개 이미지 범위 내
+                const imageNumber = String(imageIndex).padStart(3, '0'); // 001, 002, 003 형식
+                const imagePath = `./images/18Nahan/LH${imageNumber}.jpg`;
+                
+                imageDiv.innerHTML = `
+                    <img src="${imagePath}" 
+                         alt="18나한 ${imageIndex}" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                         onclick="openImageModal(this.src, this.alt)">
+                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+                        이미지 로딩 실패<br>📷<br>LH${imageNumber}
+                    </div>
+                `;
+            } else {
+                // 빈 슬롯 (2페이지의 경우 2개만 표시)
                 imageDiv.innerHTML = `
                     <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
                         -
