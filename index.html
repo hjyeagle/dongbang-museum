@@ -848,6 +848,7 @@
     <button class="back-to-top" onclick="scrollToTop()" title="맨 위로">↑</button>
 
     <script>
+        <script>
         // 현재 페이지 상태 관리
 const pageState = {
     'goryeo-joseon': { current: 1, total: 7 },    // 99개 이미지 = 7페이지
@@ -1066,7 +1067,7 @@ function updateGallery(category) {
             
             if (imageIndex <= 5) {
                 const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Pottery/MQ${imageNumber}.jpg`;
+                const imagePath = `./images/Wooden/MQ${imageNumber}.jpg`;
                 
                 imageDiv.innerHTML = `
                     <img src="${imagePath}" 
@@ -1097,7 +1098,7 @@ function updateGallery(category) {
             
             if (imageIndex <= 77) {
                 const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/QT${imageNumber}.jpg`;
+                const imagePath = `./images/Gold_silver_copper/QT${imageNumber}.jpg`;
                 
                 imageDiv.innerHTML = `
                     <img src="${imagePath}" 
@@ -1128,7 +1129,7 @@ function updateGallery(category) {
             
             if (imageIndex <= 34) {
                 const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/TQ${imageNumber}.jpg`;
+                const imagePath = `./images/Earthenware_pottery/TQ${imageNumber}.jpg`;
                 
                 imageDiv.innerHTML = `
                     <img src="${imagePath}" 
@@ -1159,7 +1160,7 @@ function updateGallery(category) {
             
             if (imageIndex <= 10) {
                 const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/WZ${imageNumber}.jpg`;
+                const imagePath = `./images/Hongsan_culture_letter_jade/WZ${imageNumber}.jpg`;
                 
                 imageDiv.innerHTML = `
                     <img src="${imagePath}" 
@@ -1314,7 +1315,6 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('popstate', function(event) {
     showMainPage();
 });
-    </script>
     </script>
 </body>
 </html>
