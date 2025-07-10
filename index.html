@@ -848,473 +848,141 @@
     <button class="back-to-top" onclick="scrollToTop()" title="맨 위로">↑</button>
 
     <script>
-        <script>
         // 현재 페이지 상태 관리
-const pageState = {
-    'goryeo-joseon': { current: 1, total: 7 },    // 99개 이미지 = 7페이지
-    'buddha': { current: 1, total: 2 },           // 24개 이미지 = 2페이지  
-    'hongshan-relics': { current: 1, total: 2 },  // 20개 이미지 = 2페이지
-    'arhat': { current: 1, total: 2 },            // 18개 이미지 = 2페이지
-    'woodcraft': { current: 1, total: 1 },        // 5개 이미지 = 1페이지
-    'metal': { current: 1, total: 5 },            // 77개 이미지 = 5페이지
-    'pottery': { current: 1, total: 3 },          // 34개 이미지 = 3페이지
-    'hongshan-text': { current: 1, total: 1 },    // 10개 이미지 = 1페이지
-    'ceramic-brick': { current: 1, total: 1 }     // 6개 이미지 = 1페이지
-};
+        const pageState = {
+            'goryeo-joseon': { current: 1, total: 3 },
+            'buddha': { current: 1, total: 3 },
+            'hongshan-relics': { current: 1, total: 3 },
+            'arhat': { current: 1, total: 3 },
+            'woodcraft': { current: 1, total: 3 },
+            'metal': { current: 1, total: 3 },
+            'pottery': { current: 1, total: 3 },
+            'hongshan-text': { current: 1, total: 3 },
+            'ceramic-brick': { current: 1, total: 3 }
+        };
 
-// 현재 활성 카테고리 추적
-let currentCategory = null;
+        // 현재 활성 카테고리 추적
+        let currentCategory = null;
 
-// 메인 페이지 표시
-function showMainPage() {
-    // 모든 카테고리 페이지 숨기기
-    document.querySelectorAll('.category-page').forEach(page => {
-        page.classList.remove('active');
-    });
-    // 메인 페이지 표시
-    document.getElementById('main-page').style.display = 'block';
-    
-    // 네비게이션 메뉴 활성화 해제
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    currentCategory = null;
-    scrollToTop();
-}
-
-// 카테고리 페이지 표시
-function showCategory(category) {
-    // 메인 페이지 숨기기
-    document.getElementById('main-page').style.display = 'none';
-    
-    // 모든 카테고리 페이지 숨기기
-    document.querySelectorAll('.category-page').forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    // 선택된 카테고리 페이지 표시
-    document.getElementById(category + '-page').classList.add('active');
-    
-    // 네비게이션 메뉴 활성화
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    currentCategory = category;
-    
-    // 갤러리 초기화
-    initializeGallery(category);
-    scrollToTop();
-}
-
-// 갤러리 초기화
-function initializeGallery(category) {
-    pageState[category].current = 1;
-    updateGallery(category);
-}
-
-// 갤러리 업데이트
-function updateGallery(category) {
-    const gallery = document.getElementById(category + '-gallery');
-    const currentPage = pageState[category].current;
-    const totalPages = pageState[category].total;
-    
-    gallery.innerHTML = '';
-    const startIndex = (currentPage - 1) * 16;
-    
-    // 카테고리별 이미지 설정
-    if (category === 'goryeo-joseon') {
-        // 고려청자·조선백자 카테고리 (99개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
+        // 메인 페이지 표시
+        function showMainPage() {
+            // 모든 카테고리 페이지 숨기기
+            document.querySelectorAll('.category-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // 메인 페이지 표시
+            document.getElementById('main-page').style.display = 'block';
             
-            if (imageIndex <= 99) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Goryeo_celadon_Korean_white_porcelain/CQ${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="고려청자·조선백자 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>CQ${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
+            // 네비게이션 메뉴 활성화 해제
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            currentCategory = null;
+            scrollToTop();
+        }
+
+        // 카테고리 페이지 표시
+        function showCategory(category) {
+            // 메인 페이지 숨기기
+            document.getElementById('main-page').style.display = 'none';
+            
+            // 모든 카테고리 페이지 숨기기
+            document.querySelectorAll('.category-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 선택된 카테고리 페이지 표시
+            document.getElementById(category + '-page').classList.add('active');
+            
+            // 네비게이션 메뉴 활성화
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentCategory = category;
+            
+            // 갤러리 초기화
+            initializeGallery(category);
+            scrollToTop();
+        }
+
+        // 갤러리 초기화
+        function initializeGallery(category) {
+            pageState[category].current = 1;
+            updateGallery(category);
+        }
+
+        // 갤러리 업데이트
+        function updateGallery(category) {
+            const gallery = document.getElementById(category + '-gallery');
+            const currentPage = pageState[category].current;
+            const totalPages = pageState[category].total;
+            
+            // 갤러리 내용 생성 (16개씩, 4x4 그리드)
+            gallery.innerHTML = '';
+            const startIndex = (currentPage - 1) * 16;
+            
+            for (let i = 1; i <= 16; i++) {
+                const imageIndex = startIndex + i;
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'image-placeholder';
+                imageDiv.innerHTML = `소장예물 ${imageIndex}<br>(이미지 링크)`;
+                gallery.appendChild(imageDiv);
             }
             
-            gallery.appendChild(imageDiv);
+            // 페이지 정보 업데이트
+            document.getElementById(category + '-info').textContent = `${currentPage} / ${totalPages}`;
+            
+            // 버튼 상태 업데이트
+            document.getElementById(category + '-prev').disabled = currentPage === 1;
+            document.getElementById(category + '-next').disabled = currentPage === totalPages;
         }
-    } else if (category === 'buddha') {
-        // 불상 카테고리 (24개 이미지) - 특수 넘버링 처리
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 24) {
-                let imageNumber;
-                if (imageIndex <= 9) {
-                    // 1-9번: FX001.jpg 형식 (3자리)
-                    imageNumber = String(imageIndex).padStart(3, '0');
-                } else {
-                    // 10-24번: FX0010.jpg 형식 (4자리)
-                    imageNumber = String(imageIndex).padStart(4, '0');
-                }
-                
-                const imagePath = `./images/Buddha_statue/FX${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="불상 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>FX${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'hongshan-relics') {
-        // 홍산문화 관련 카테고리 (20개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 20) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Hongsan_culture/HS${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="홍산문화 관련 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>HS${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'arhat') {
-        // 18나한 카테고리 (18개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 18) { // 18개 이미지 범위 내
-                const imageNumber = String(imageIndex).padStart(3, '0'); // 001, 002, 003 형식
-                const imagePath = `./images/18Nahan/LH${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="18나한 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>LH${imageNumber}
-                    </div>
-                `;
-            } else {
-                // 빈 슬롯 (2페이지의 경우 2개만 표시)
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'woodcraft') {
-        // 목기 카테고리 (5개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 5) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Wooden/MQ${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="목기 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>MQ${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'metal') {
-        // 청동·금동·은제 카테고리 (77개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 77) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Gold_silver_copper/QT${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="청동·금동·은제 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>QT${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'pottery') {
-        // 토기·도기 카테고리 (34개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 34) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Earthenware_pottery/TQ${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="토기·도기 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>TQ${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'hongshan-text') {
-        // 홍산문화 문자옥기 카테고리 (10개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 10) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Hongsan_culture_letter_jade/WZ${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="홍산문화 문자옥기 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>WZ${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    } else if (category === 'ceramic-brick') {
-        // 도기벽돌 카테고리 (6개 이미지)
-        for (let i = 1; i <= 16; i++) {
-            const imageIndex = startIndex + i;
-            const imageDiv = document.createElement('div');
-            imageDiv.className = 'image-placeholder';
-            
-            if (imageIndex <= 6) {
-                const imageNumber = String(imageIndex).padStart(3, '0');
-                const imagePath = `./images/Pottery/TW${imageNumber}.jpg`;
-                
-                imageDiv.innerHTML = `
-                    <img src="${imagePath}" 
-                         alt="도기벽돌 ${imageIndex}" 
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onclick="openImageModal(this.src, this.alt)">
-                    <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                        이미지 로딩 실패<br>📷<br>TW${imageNumber}
-                    </div>
-                `;
-            } else {
-                imageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                        -
-                    </div>
-                `;
-            }
-            
-            gallery.appendChild(imageDiv);
-        }
-    }
-    
-    // 페이지 정보 업데이트
-    document.getElementById(category + '-info').textContent = `${currentPage} / ${totalPages}`;
-    
-    // 버튼 상태 업데이트
-    document.getElementById(category + '-prev').disabled = currentPage === 1;
-    document.getElementById(category + '-next').disabled = currentPage === totalPages;
-}
 
-// 이미지 모달 기능
-function openImageModal(src, alt) {
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-        background: rgba(0,0,0,0.8); z-index: 1000; display: flex; 
-        align-items: center; justify-content: center; cursor: pointer;
-        padding: 20px; box-sizing: border-box;
-    `;
-    
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = alt;
-    img.style.cssText = `
-        max-width: 100%; max-height: 100%; border-radius: 10px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: default;
-        object-fit: contain;
-    `;
-    
-    const closeBtn = document.createElement('div');
-    closeBtn.innerHTML = '✕';
-    closeBtn.style.cssText = `
-        position: absolute; top: 30px; right: 30px; color: white; 
-        font-size: 2rem; cursor: pointer; background: rgba(0,0,0,0.5); 
-        width: 40px; height: 40px; border-radius: 50%; display: flex; 
-        align-items: center; justify-content: center; font-weight: bold;
-    `;
-    
-    modal.appendChild(img);
-    modal.appendChild(closeBtn);
-    document.body.appendChild(modal);
-    
-    // 클릭으로 닫기 (이미지 제외)
-    modal.onclick = (e) => {
-        if (e.target === modal || e.target === closeBtn) {
-            modal.remove();
+        // 이전 페이지
+        function prevPage(category) {
+            if (pageState[category].current > 1) {
+                pageState[category].current--;
+                updateGallery(category);
+                scrollToGallery();
+            }
         }
-    };
-    
-    // ESC 키로 닫기
-    const handleEsc = (e) => {
-        if (e.key === 'Escape') {
-            modal.remove();
-            document.removeEventListener('keydown', handleEsc);
+
+        // 다음 페이지
+        function nextPage(category) {
+            if (pageState[category].current < pageState[category].total) {
+                pageState[category].current++;
+                updateGallery(category);
+                scrollToGallery();
+            }
         }
-    };
-    document.addEventListener('keydown', handleEsc);
-}
 
-// 이전 페이지
-function prevPage(category) {
-    if (pageState[category].current > 1) {
-        pageState[category].current--;
-        updateGallery(category);
-        scrollToGallery();
-    }
-}
+        // 갤러리로 스크롤
+        function scrollToGallery() {
+            document.querySelector('.image-gallery').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
 
-// 다음 페이지
-function nextPage(category) {
-    if (pageState[category].current < pageState[category].total) {
-        pageState[category].current++;
-        updateGallery(category);
-        scrollToGallery();
-    }
-}
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
-// 갤러리로 스크롤
-function scrollToGallery() {
-    document.querySelector('.image-gallery').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-}
+        // 페이지 로드 시 메인 페이지 표시
+        document.addEventListener('DOMContentLoaded', function() {
+            showMainPage();
+        });
 
-// 맨 위로 스크롤
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// 페이지 로드 시 메인 페이지 표시
-document.addEventListener('DOMContentLoaded', function() {
-    showMainPage();
-});
-
-// 뒤로가기 버튼 처리
-window.addEventListener('popstate', function(event) {
-    showMainPage();
-});
+        // 뒤로가기 버튼 처리
+        window.addEventListener('popstate', function(event) {
+            showMainPage();
+        });
     </script>
 </body>
 </html>
