@@ -884,6 +884,8 @@
 
         // 카테고리 페이지 표시
         function showCategory(category) {
+            console.log('showCategory 호출됨:', category); // 디버깅용
+            
             // 메인 페이지 숨기기
             document.getElementById('main-page').style.display = 'none';
             
@@ -923,11 +925,31 @@
 
         // 갤러리 업데이트
         function updateGallery(category) {
+            console.log('updateGallery 호출됨:', category); // 디버깅용
+            
             const gallery = document.getElementById(category + '-gallery');
+            console.log('갤러리 요소:', gallery); // 디버깅용
+            
             const currentPage = pageState[category].current;
             const totalPages = pageState[category].total;
             
             gallery.innerHTML = '';
+            
+            // 테스트용 하드코딩된 이미지 하나만 추가
+            if (category === 'goryeo-joseon') {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'image-placeholder';
+                testDiv.innerHTML = `
+                    <img src="https://hjyeagle.github.io/dongbang-museum/images/Goryeo_celadon_Korean_white_porcelain/CQ001.jpg" 
+                         alt="테스트 이미지" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
+                         onload="console.log('이미지 로드 성공')"
+                         onerror="console.log('이미지 로드 실패')">
+                `;
+                gallery.appendChild(testDiv);
+                console.log('테스트 이미지 추가됨');
+                return; // 일단 여기서 종료
+            }
             const startIndex = (currentPage - 1) * 16;
             
             // 카테고리별 이미지 설정
