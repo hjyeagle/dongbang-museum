@@ -956,14 +956,22 @@ function updateGallery(category) {
             gallery.appendChild(imageDiv);
         }
     } else if (category === 'buddha') {
-        // 불상 카테고리 (24개 이미지)
+        // 불상 카테고리 (24개 이미지) - 특수 넘버링 처리
         for (let i = 1; i <= 16; i++) {
             const imageIndex = startIndex + i;
             const imageDiv = document.createElement('div');
             imageDiv.className = 'image-placeholder';
             
-            if (imageIndex <= 24) { // 24개 이미지 범위 내
-                const imageNumber = String(imageIndex).padStart(3, '0'); // 001, 002, 003 형식
+            if (imageIndex <= 24) {
+                let imageNumber;
+                if (imageIndex <= 9) {
+                    // 1-9번: FX001.jpg 형식 (3자리)
+                    imageNumber = String(imageIndex).padStart(3, '0');
+                } else {
+                    // 10-24번: FX0010.jpg 형식 (4자리)
+                    imageNumber = String(imageIndex).padStart(4, '0');
+                }
+                
                 const imagePath = `./images/Buddha_statue/FX${imageNumber}.jpg`;
                 
                 imageDiv.innerHTML = `
@@ -977,7 +985,6 @@ function updateGallery(category) {
                     </div>
                 `;
             } else {
-                // 빈 슬롯 (2페이지의 경우 8개만 표시)
                 imageDiv.innerHTML = `
                     <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
                         -
