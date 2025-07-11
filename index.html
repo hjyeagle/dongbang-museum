@@ -103,12 +103,18 @@
             text-align: center;
         }
 
+        .intro-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
         .intro-section {
             background: white;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
             border-left: 5px solid #8B4513;
         }
 
@@ -123,6 +129,58 @@
             font-size: 1.1rem;
             margin-bottom: 15px;
             text-align: left;
+        }
+
+        .sns-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #8B4513;
+            height: fit-content;
+        }
+
+        .sns-section h2 {
+            color: #8B4513;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sns-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sns-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .sns-item:hover {
+            background: #8B4513;
+            color: white;
+            transform: translateX(5px);
+            border-color: #A0522D;
+        }
+
+        .sns-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            min-width: 30px;
+        }
+
+        .sns-text {
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .welcome-content {
@@ -207,9 +265,9 @@
 
         .video-container video {
             width: 100%;
-            height: 320px;      /* ← 280px를 320px로 변경 2025_0711 */
+            height: 320px;
             border-radius: 10px;
-            object-fit: contain;  /* ← cover를 contain으로 변경 2025_0711 */
+            object-fit: contain;
             background: #f0f0f0;
         }
 
@@ -236,7 +294,7 @@
 
         .video-placeholder {
             background: #f0f0f0;
-            height: 280px;
+            height: 320px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -320,10 +378,9 @@
             gap: 15px;
         }
 
-       <!-- ============ 이미지 높이 수정 시작 ============ -->
         .image-placeholder {
             background: #f8f8f8;
-            height: 320px;  /* 기존 200px에서 280px로 변경 */
+            height: 320px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -336,7 +393,6 @@
             position: relative;
             overflow: hidden;
         }
-<!-- ============ 이미지 높이 수정 끝 ============ -->
 
         .image-placeholder:hover {
             border-color: #8B4513;
@@ -440,7 +496,6 @@
             }
         }
 
-     <!-- ============ 이 부분을 찾으세요 ============ -->
         @media (max-width: 768px) {
             .title {
                 font-size: 1.6rem;
@@ -454,7 +509,24 @@
                 padding: 20px 15px;
             }
 
-            .intro-section, .welcome-content {
+            .intro-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .intro-section {
+                padding: 25px;
+            }
+
+            .sns-section {
+                padding: 20px;
+            }
+            
+            .sns-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .welcome-content {
                 padding: 25px;
             }
 
@@ -473,11 +545,11 @@
             }
 
             .video-container video {
-                height: 220px !important;  
+                height: 200px !important;
             }
 
             .video-placeholder {
-                height: 220px;
+                height: 200px;
             }
 
             .image-grid {
@@ -486,10 +558,9 @@
             }
 
             .image-placeholder {
-                height: 250px;  /* ← 이 부분을 150px에서 220px로 수정 */
+                height: 220px;
                 font-size: 0.8rem;
             }
-<!-- ============ 여기까지 ============ -->
 
             .gallery-header {
                 flex-direction: column;
@@ -574,13 +645,45 @@
     <div class="container">
         <!-- 메인 페이지 -->
         <div id="main-page" class="main-page">
-            <div class="intro-section">
-                <h2>🏛️ 동방예술관 건립 프로젝트</h2>
-                <p><strong>중국 대련에서 운영되던 고려박물관의 3,000여 점을 승계하여</strong></p>
-                <p><strong>'동방예술관'</strong>이라는 새로운 이름으로 건립하는 의미있는 프로젝트입니다.</p>
-                <p>📖 <strong>목표:</strong> 소장유물 검증비용, 도록 제작비용 및 동방예술관 건립기금 마련을 위한 크라우드펀딩</p>
-                <p>🤝 <strong>협력:</strong> 인플루언서, 순환전시 스폰서 기업, 유물감정기관과의 연계</p>
-                <p>🏺 <strong>소장품:</strong> 한국고대유물로 추정되는 동방예술관 소장예물 (9개 카테고리)</p>
+            <div class="intro-wrapper">
+                <div class="intro-section">
+                    <h2>🏛️ 동방예술관 건립 프로젝트</h2>
+                    <p><strong>중국 대련에서 운영되던 고려박물관의 3,000여 점을 승계하여</strong></p>
+                    <p><strong>'동방예술관'</strong>이라는 새로운 이름으로 건립하는 의미있는 프로젝트입니다.</p>
+                    <p>📖 <strong>목표:</strong> 소장유물 검증비용, 도록 제작비용 및 동방예술관 건립기금 마련을 위한 크라우드펀딩</p>
+                    <p>🤝 <strong>협력:</strong> 인플루언서, 순환전시 스폰서 기업, 유물감정기관과의 연계</p>
+                    <p>🏺 <strong>소장품:</strong> 한국고대유물로 추정되는 동방예술관 소장예물 (9개 카테고리)</p>
+                </div>
+
+                <div class="sns-section">
+                    <h2>📱 동방예술관 SNS</h2>
+                    <div class="sns-links">
+                        <a href="https://facebook.com/DongbangArtmuseum" target="_blank" class="sns-item facebook">
+                            <span class="sns-icon">📘</span>
+                            <span class="sns-text">Facebook</span>
+                        </a>
+                        <a href="https://instagram.com/dongbangartmuseum" target="_blank" class="sns-item instagram">
+                            <span class="sns-icon">📷</span>
+                            <span class="sns-text">Instagram</span>
+                        </a>
+                        <a href="https://blog.naver.com/dongbang_artmuseum" target="_blank" class="sns-item blog">
+                            <span class="sns-icon">📝</span>
+                            <span class="sns-text">블로그</span>
+                        </a>
+                        <a href="https://www.youtube.com/@dongbang_artmuseum" target="_blank" class="sns-item youtube">
+                            <span class="sns-icon">📺</span>
+                            <span class="sns-text">YouTube</span>
+                        </a>
+                        <a href="https://koreamuseum.modoo.link" target="_blank" class="sns-item website">
+                            <span class="sns-icon">🌐</span>
+                            <span class="sns-text">홈페이지</span>
+                        </a>
+                        <a href="https://creator.tv.naver.com/channel/dongbangartmuseum/dashboard" target="_blank" class="sns-item navertv">
+                            <span class="sns-icon">📹</span>
+                            <span class="sns-text">Naver TV</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <div class="welcome-content">
@@ -607,7 +710,7 @@
                             <source src="./videos/CQ-001.mp4" type="video/mp4">
                             브라우저가 동영상을 지원하지 않습니다.
                         </video>
-                        <div class="video-title">고려청자.조선백자</div>
+                        <div class="video-title">고려청자의 역사와 특징</div>
                     </div>
                     <div class="video-container">
                         <div class="video-loading">동영상 로딩 중...</div>
@@ -615,7 +718,7 @@
                             <source src="./videos/CQ-006.mp4" type="video/mp4">
                             브라우저가 동영상을 지원하지 않습니다.
                         </video>
-                        <div class="video-title">고려청자.조선백자</div>
+                        <div class="video-title">조선백자의 아름다움</div>
                     </div>
                     <div class="video-container">
                         <div class="video-loading">동영상 로딩 중...</div>
@@ -623,7 +726,7 @@
                             <source src="./videos/CQ-007.mp4" type="video/mp4">
                             브라우저가 동영상을 지원하지 않습니다.
                         </video>
-                        <div class="video-title">고려청자.조선백자</div>
+                        <div class="video-title">도자기 제작기법 해설</div>
                     </div>
                 </div>
             </div>
@@ -649,7 +752,6 @@
                 <h2>🙏 불상</h2>
             </div>
             
-            <!-- ============ 2번 불상 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -679,7 +781,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 2번 불상 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -700,7 +801,6 @@
                 <h2>🗿 홍산문화 관련 (옥기, 도자기, 신상, 운석조각, 남근조각품 등)</h2>
             </div>
             
-            <!-- ============ 3번 홍산문화 관련 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -730,7 +830,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 3번 홍산문화 관련 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -751,7 +850,6 @@
                 <h2>🧘 18나한</h2>
             </div>
             
-            <!-- ============ 4번 18나한 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -781,7 +879,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 4번 18나한 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -802,7 +899,6 @@
                 <h2>🪵 목기</h2>
             </div>
             
-            <!-- ============ 5번 목기 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -832,7 +928,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 5번 목기 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -853,7 +948,6 @@
                 <h2>⚱️ 청동·금동·은제</h2>
             </div>
             
-            <!-- ============ 6번 청동·금동·은제 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -883,7 +977,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 6번 청동·금동·은제 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -904,7 +997,6 @@
                 <h2>🏺 토기·도기</h2>
             </div>
             
-            <!-- ============ 7번 토기·도기 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -934,7 +1026,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 7번 토기·도기 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -955,7 +1046,6 @@
                 <h2>📜 홍산문화 문자옥기</h2>
             </div>
             
-            <!-- ============ 8번 홍산문화 문자옥기 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -985,7 +1075,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 8번 홍산문화 문자옥기 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
@@ -1006,7 +1095,6 @@
                 <h2>🧱 도기벽돌</h2>
             </div>
             
-            <!-- ============ 9번 도기벽돌 동영상 연결 시작 ============ -->
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
@@ -1036,7 +1124,6 @@
                     </div>
                 </div>
             </div>
-<!-- ============ 9번 도기벽돌 동영상 연결 끝 ============ -->
             
             <div class="image-gallery">
                 <div class="gallery-header">
