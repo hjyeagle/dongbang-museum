@@ -320,9 +320,10 @@
             gap: 15px;
         }
 
+       <!-- ============ 이미지 높이 수정 시작 ============ -->
         .image-placeholder {
             background: #f8f8f8;
-            height: 200px;
+            height: 280px;  /* 기존 200px에서 280px로 변경 */
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -335,6 +336,7 @@
             position: relative;
             overflow: hidden;
         }
+<!-- ============ 이미지 높이 수정 끝 ============ -->
 
         .image-placeholder:hover {
             border-color: #8B4513;
@@ -438,6 +440,7 @@
             }
         }
 
+     <!-- ============ 이 부분을 찾으세요 ============ -->
         @media (max-width: 768px) {
             .title {
                 font-size: 1.6rem;
@@ -470,11 +473,11 @@
             }
 
             .video-container video {
-                height: 200px !important;
+                height: 220px !important;
             }
 
             .video-placeholder {
-                height: 200px;
+                height: 220px;
             }
 
             .image-grid {
@@ -483,9 +486,10 @@
             }
 
             .image-placeholder {
-                height: 150px;
+                height: 220px;  /* ← 이 부분을 150px에서 220px로 수정 */
                 font-size: 0.8rem;
             }
+<!-- ============ 여기까지 ============ -->
 
             .gallery-header {
                 flex-direction: column;
