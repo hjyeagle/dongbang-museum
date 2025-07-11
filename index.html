@@ -191,6 +191,19 @@
             gap: 20px;
         }
 
+        .video-container {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
         .video-placeholder {
             background: #f0f0f0;
             height: 200px;
@@ -418,6 +431,10 @@
                 gap: 15px;
             }
 
+            .video-container video {
+                height: 150px !important;
+            }
+
             .video-placeholder {
                 height: 150px;
             }
@@ -534,14 +551,26 @@
             <div class="video-section">
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
-                    <div class="video-placeholder">
-                        고려청자 소개<br>(동영상 링크)
+                    <div class="video-container">
+                        <video controls preload="metadata" style="width: 100%; height: 200px; border-radius: 10px; object-fit: cover;">
+                            <source src="./videos/1.CQ-001.mp4" type="video/mp4">
+                            브라우저가 동영상을 지원하지 않습니다.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #8B4513; font-weight: bold;">고려청자 소개</p>
                     </div>
-                    <div class="video-placeholder">
-                        조선백자 소개<br>(동영상 링크)
+                    <div class="video-container">
+                        <video controls preload="metadata" style="width: 100%; height: 200px; border-radius: 10px; object-fit: cover;">
+                            <source src="./videos/2.CQ-006.mp4" type="video/mp4">
+                            브라우저가 동영상을 지원하지 않습니다.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #8B4513; font-weight: bold;">조선백자 소개</p>
                     </div>
-                    <div class="video-placeholder">
-                        제작기법 설명<br>(동영상 링크)
+                    <div class="video-container">
+                        <video controls preload="metadata" style="width: 100%; height: 200px; border-radius: 10px; object-fit: cover;">
+                            <source src="./videos/3.CQ-007.mp4" type="video/mp4">
+                            브라우저가 동영상을 지원하지 않습니다.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #8B4513; font-weight: bold;">제작기법 설명</p>
                     </div>
                 </div>
             </div>
