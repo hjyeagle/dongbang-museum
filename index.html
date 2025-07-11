@@ -197,11 +197,41 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .video-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .video-title {
+            text-align: center;
+            margin-top: 10px;
+            color: #8B4513;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 69, 19, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: none;
         }
 
         .video-placeholder {
@@ -552,25 +582,28 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-container">
-                        <video controls preload="metadata" style="width: 100%; height: 200px; border-radius: 10px; object-fit: cover;">
+                        <div class="video-loading">동영상 로딩 중...</div>
+                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
                             <source src="./videos/CQ-001.mp4" type="video/mp4">
                             브라우저가 동영상을 지원하지 않습니다.
                         </video>
-                        <p style="text-align: center; margin-top: 10px; color: #8B4513; font-weight: bold;">고려청자 소개</p>
+                        <div class="video-title">고려청자의 역사와 특징</div>
                     </div>
                     <div class="video-container">
-                        <video controls preload="metadata" style="width: 100%; height: 200px; border-radius: 10px; object-fit: cover;">
+                        <div class="video-loading">동영상 로딩 중...</div>
+                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
                             <source src="./videos/CQ-006.mp4" type="video/mp4">
                             브라우저가 동영상을 지원하지 않습니다.
                         </video>
-                        <p style="text-align: center; margin-top: 10px; color: #8B4513; font-weight: bold;">조선백자 소개</p>
+                        <div class="video-title">조선백자의 아름다움</div>
                     </div>
                     <div class="video-container">
-                        <video controls preload="metadata" style="width: 100%; height: 200px; border-radius: 10px; object-fit: cover;">
+                        <div class="video-loading">동영상 로딩 중...</div>
+                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
                             <source src="./videos/CQ-007.mp4" type="video/mp4">
                             브라우저가 동영상을 지원하지 않습니다.
                         </video>
-                        <p style="text-align: center; margin-top: 10px; color: #8B4513; font-weight: bold;">제작기법 설명</p>
+                        <div class="video-title">도자기 제작기법 해설</div>
                     </div>
                 </div>
             </div>
@@ -600,13 +633,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        불상 조각기법<br>(동영상 링크)
+                        불상 조각기법<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        시대별 특징<br>(동영상 링크)
+                        시대별 특징<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        보존 상태<br>(동영상 링크)
+                        보존 상태<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -634,13 +667,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        홍산문화 개요<br>(동영상 링크)
+                        홍산문화 개요<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        옥기 제작기법<br>(동영상 링크)
+                        옥기 제작기법<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        문화적 의미<br>(동영상 링크)
+                        문화적 의미<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -668,13 +701,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        18나한의 의미<br>(동영상 링크)
+                        18나한의 의미<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        조각 양식<br>(동영상 링크)
+                        조각 양식<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        개별 나한 소개<br>(동영상 링크)
+                        개별 나한 소개<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -702,13 +735,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        전통 목공예<br>(동영상 링크)
+                        전통 목공예<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        목재 및 기법<br>(동영상 링크)
+                        목재 및 기법<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        용도별 분류<br>(동영상 링크)
+                        용도별 분류<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -736,13 +769,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        금속공예 기법<br>(동영상 링크)
+                        금속공예 기법<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        재료별 특성<br>(동영상 링크)
+                        재료별 특성<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        문양과 장식<br>(동영상 링크)
+                        문양과 장식<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -770,13 +803,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        토기 제작과정<br>(동영상 링크)
+                        토기 제작과정<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        도기 발달사<br>(동영상 링크)
+                        도기 발달사<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        문양과 형태<br>(동영상 링크)
+                        문양과 형태<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -804,13 +837,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        문자옥기 개념<br>(동영상 링크)
+                        문자옥기 개념<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        문자 해석<br>(동영상 링크)
+                        문자 해석<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        역사적 의미<br>(동영상 링크)
+                        역사적 의미<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -838,13 +871,13 @@
                 <h3>관련 동영상</h3>
                 <div class="video-grid">
                     <div class="video-placeholder">
-                        도기벽돌 제작<br>(동영상 링크)
+                        도기벽돌 제작<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        건축에서의 활용<br>(동영상 링크)
+                        건축에서의 활용<br>(동영상 준비 중)
                     </div>
                     <div class="video-placeholder">
-                        문양과 기법<br>(동영상 링크)
+                        문양과 기법<br>(동영상 준비 중)
                     </div>
                 </div>
             </div>
@@ -892,6 +925,38 @@
 
         // 현재 활성 카테고리 추적
         let currentCategory = null;
+
+        // 동영상 로딩 관련 함수들
+        function showVideoLoading(videoElement) {
+            const container = videoElement.closest('.video-container');
+            const loadingDiv = container.querySelector('.video-loading');
+            if (loadingDiv) {
+                loadingDiv.style.display = 'block';
+            }
+        }
+
+        function hideVideoLoading(videoElement) {
+            const container = videoElement.closest('.video-container');
+            const loadingDiv = container.querySelector('.video-loading');
+            if (loadingDiv) {
+                loadingDiv.style.display = 'none';
+            }
+        }
+
+        function handleVideoError(videoElement) {
+            hideVideoLoading(videoElement);
+            const container = videoElement.closest('.video-container');
+            const videoTitle = container.querySelector('.video-title');
+            
+            // 비디오 엘리먼트를 플레이스홀더로 변경
+            videoElement.style.display = 'none';
+            
+            const placeholder = document.createElement('div');
+            placeholder.className = 'video-placeholder';
+            placeholder.innerHTML = `동영상 로딩 실패<br>📹<br><small>파일을 확인해주세요</small>`;
+            
+            container.insertBefore(placeholder, videoTitle);
+        }
 
         // 메인 페이지 표시
         function showMainPage() {
