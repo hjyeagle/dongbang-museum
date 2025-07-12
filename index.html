@@ -133,7 +133,7 @@
 
         .sns-section {
             background: white;
-            padding: 30px;
+            padding: 45px 30px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             border-left: 5px solid #8B4513;
@@ -150,7 +150,7 @@
         .sns-links {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 35px;    /* 12px → 35px로 대폭 늘리기 */
         }
 
         .sns-item {
@@ -619,6 +619,38 @@
                 min-width: 70px;
             }
         }
+       /* ============ 동방예술관 건물 이미지 스타일 수정 시작 ============ */
+        .museum-building-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .museum-building-img {
+            width: 100%;
+            max-width: 550px;  /* 800px → 600px로 축소 */
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);  /* 그림자 줄임 */
+            transition: transform 0.3s ease;
+            border: 2px solid #8B4513;  /* 테두리 줄임 */
+        }
+
+        .museum-building-img:hover {
+            transform: scale(1.01);  /* 확대 효과 줄임 */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .museum-building-img {
+                max-width: 90%;  /* 100% → 90%로 축소 */
+                margin: 0 auto;
+            }
+            
+            .museum-building-section {
+                margin-top: 20px;  /* 여백 줄임 */
+            }
+        }
+/* ============ 동방예술관 건물 이미지 스타일 수정 끝 ============ */
     </style>
 </head>
 <body>
@@ -653,7 +685,13 @@
                     <p>📖 <strong>목표:</strong> 소장유물 검증비용, 도록 제작비용 및 동방예술관 건립기금 마련을 위한 크라우드펀딩</p>
                     <p>🤝 <strong>협력:</strong> 인플루언서, 순환전시 스폰서 기업, 유물감정기관과의 연계</p>
                     <p>🏺 <strong>소장품:</strong> 한국고대유물로 추정되는 동방예술관 소장예물 (9개 카테고리)</p>
+                   <!-- 이미지 섹션을 intro-section 안으로 이동 -->
+                    <div class="museum-building-section">
+                        <img src="./images/dongbang_intro.jpg" alt="동방예술관 건립 프로젝트" class="museum-building-img">
+                    </div>
                 </div>
+<!-- ============ 동방예술관 건물 이미지 추가 끝 ============ -->
+                
 
                 <div class="sns-section">
                     <h2>📱 동방예술관 SNS</h2>
@@ -1666,3 +1704,4 @@
     </script>
 </body>
 </html>
+
