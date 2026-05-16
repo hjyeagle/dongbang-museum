@@ -1,1713 +1,1455 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동방예술관 소장유물 소개</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f1e8, #e8ddd0);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .header {
-            background: linear-gradient(90deg, #8B4513, #A0522D);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-
-        .title-section {
-            display: flex;
-            align-items: center;
-        }
-
-        .title {
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-right: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .home-icon {
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .home-icon:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.1);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav-item {
-            background: rgba(255,255,255,0.1);
-            padding: 10px 15px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 2px solid transparent;
-            white-space: nowrap;
-        }
-
-        .nav-item:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        .nav-item.active {
-            background: white;
-            color: #8B4513;
-            border-color: #A0522D;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .main-page {
-            text-align: center;
-        }
-
-        .intro-wrapper {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .intro-section {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-left: 5px solid #8B4513;
-        }
-
-        .intro-section h2 {
-            color: #8B4513;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .intro-section p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .sns-section {
-            background: white;
-            padding: 45px 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-left: 5px solid #8B4513;
-            height: fit-content;
-        }
-
-        .sns-section h2 {
-            color: #8B4513;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .sns-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;    /* 12px → 15px로 늘리기 */
-        }
-
-        .sns-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            background: #f8f8f8;
-            border-radius: 10px;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .sns-item:hover {
-            background: #8B4513;
-            color: white;
-            transform: translateX(5px);
-            border-color: #A0522D;
-        }
-
-        .sns-icon {
-            font-size: 1.2rem;
-            margin-right: 10px;
-            min-width: 30px;
-        }
-
-        .sns-text {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .welcome-content {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 6px solid #8B4513;
-        }
-
-        .welcome-content h3 {
-            color: #8B4513;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-
-        .welcome-content p {
-            font-size: 1.3rem;
-            line-height: 2;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .category-page {
-            display: none;
-        }
-
-        .category-page.active {
-            display: block;
-        }
-
-        .category-title {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .category-title h2 {
-            color: #8B4513;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .video-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .video-section h3 {
-            color: #8B4513;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .video-container {
-            background: white;
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .video-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .video-container video {
-            width: 100%;
-            height: 320px;
-            border-radius: 10px;
-            object-fit: contain;
-            background: #f0f0f0;
-        }
-
-        .video-title {
-            text-align: center;
-            margin-top: 10px;
-            color: #8B4513;
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
-
-        .video-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(139, 69, 19, 0.8);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .video-placeholder {
-            background: #f0f0f0;
-            height: 320px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ccc;
-            color: #666;
-            font-size: 1.1rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-placeholder::before {
-            content: '▶';
-            position: absolute;
-            font-size: 3rem;
-            color: #8B4513;
-            opacity: 0.3;
-        }
-
-        .image-gallery {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        }
-
-        .gallery-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .gallery-title {
-            color: #8B4513;
-            font-size: 1.6rem;
-            font-weight: bold;
-        }
-
-        .gallery-pagination {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .page-btn {
-            padding: 10px 20px;
-            background: #8B4513;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            min-width: 80px;
-        }
-
-        .page-btn:hover {
-            background: #A0522D;
-            transform: translateY(-2px);
-        }
-
-        .page-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .page-info {
-            color: #666;
-            font-weight: bold;
-            padding: 0 15px;
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .image-placeholder {
-            background: #f8f8f8;
-            height: 320px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #e0e0e0;
-            color: #666;
-            font-size: 0.9rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .image-placeholder:hover {
-            border-color: #8B4513;
-            color: #8B4513;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-
-        .image-placeholder::before {
-            content: '🏺';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-            opacity: 0.3;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #8B4513;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .back-to-top:hover {
-            background: #A0522D;
-            transform: translateY(-3px);
-        }
-
-        .footer {
-            background: linear-gradient(90deg, #8B4513, #A0522D);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .footer-info {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .footer-copyright {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 15px;
-            margin-top: 15px;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 1200px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .nav-menu {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .nav-item {
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-
-            .video-container video {
-                height: 240px;
-            }
-
-            .video-placeholder {
-                height: 240px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .title {
-                font-size: 1.6rem;
-            }
-
-            .header-content {
-                padding: 0 15px;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
-
-            .intro-wrapper {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .intro-section {
-                padding: 25px;
-            }
-
-            .sns-section {
-                padding: 20px;
-            }
-            
-            .sns-section h2 {
-                font-size: 1.3rem;
-            }
-
-            .welcome-content {
-                padding: 25px;
-            }
-
-            .nav-menu {
-                gap: 3px;
-            }
-
-            .nav-item {
-                font-size: 0.7rem;
-                padding: 6px 10px;
-            }
-
-            .video-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .video-container video {
-                height: 200px !important;
-            }
-
-            .video-placeholder {
-                height: 200px;
-            }
-
-            .image-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .image-placeholder {
-                height: 220px;
-                font-size: 0.8rem;
-            }
-
-            .gallery-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-
-            .gallery-pagination {
-                justify-content: center;
-            }
-
-            .footer {
-                padding: 25px 15px;
-            }
-
-            .footer-info {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-
-            .footer-copyright {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .title {
-                font-size: 1.4rem;
-            }
-
-            .home-icon {
-                font-size: 1.6rem;
-                padding: 8px;
-            }
-
-            .nav-item {
-                font-size: 0.6rem;
-                padding: 5px 8px;
-            }
-
-            .video-container video {
-                height: 170px !important;
-            }
-
-            .video-placeholder {
-                height: 170px;
-            }
-
-            .image-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .page-btn {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-                min-width: 70px;
-            }
-        }
-       /* ============ 동방예술관 건물 이미지 스타일 수정 시작 ============ */
-        .museum-building-section {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .museum-building-img {
-            width: 100%;
-            max-width: 550px;  /* 800px → 600px로 축소 */
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);  /* 그림자 줄임 */
-            transition: transform 0.3s ease;
-            border: 2px solid #8B4513;  /* 테두리 줄임 */
-        }
-
-        .museum-building-img:hover {
-            transform: scale(1.01);  /* 확대 효과 줄임 */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        @media (max-width: 768px) {
-            .museum-building-img {
-                max-width: 90%;  /* 100% → 90%로 축소 */
-                margin: 0 auto;
-            }
-            
-            .museum-building-section {
-                margin-top: 20px;  /* 여백 줄임 */
-            }
-        }
-/* ============ 동방예술관 건물 이미지 스타일 수정 끝 ============ */
-    </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>东方艺术馆馆藏文物介绍</title>
+ <style>
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+ body {
+ font-family: 'Microsoft YaHei', 'Noto Sans SC', 'PingFang SC', Arial, sans-serif;
+ background: linear-gradient(135deg, #f5f1e8, #e8ddd0);
+ min-height: 100vh;
+ color: #333;
+ }
+ .header {
+ background: linear-gradient(90deg, #8B4513, #A0522D);
+ color: white;
+ padding: 20px 0;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+ position: sticky;
+ top: 0;
+ z-index: 100;
+ }
+ .header-content {
+ max-width: 1400px;
+ margin: 0 auto;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 0 20px;
+ }
+ .title-section {
+ display: flex;
+ align-items: center;
+ }
+ .title {
+ font-size: 2.2rem;
+ font-weight: bold;
+ margin-right: 20px;
+ text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+ }
+ .home-icon {
+ font-size: 2rem;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ padding: 10px;
+ border-radius: 50%;
+ background: rgba(255,255,255,0.1);
+ }
+ .home-icon:hover {
+ background: rgba(255,255,255,0.2);
+ transform: scale(1.1);
+ }
+ .nav-menu {
+ display: flex;
+ gap: 5px;
+ flex-wrap: wrap;
+ justify-content: center;
+ }
+ .nav-item {
+ background: rgba(255,255,255,0.1);
+ padding: 10px 15px;
+ border-radius: 25px;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ font-size: 0.9rem;
+ font-weight: 500;
+ border: 2px solid transparent;
+ white-space: nowrap;
+ }
+ .nav-item:hover {
+ background: rgba(255,255,255,0.2);
+ transform: translateY(-2px);
+ }
+ .nav-item.active {
+ background: white;
+ color: #8B4513;
+ border-color: #A0522D;
+ }
+ .container {
+ max-width: 1400px;
+ margin: 0 auto;
+ padding: 40px 20px;
+ }
+ .main-page {
+ text-align: center;
+ }
+ .intro-wrapper {
+ display: grid;
+ grid-template-columns: 2fr 1fr;
+ gap: 30px;
+ margin-bottom: 40px;
+ }
+ .intro-section {
+ background: white;
+ padding: 40px;
+ border-radius: 15px;
+ box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+ border-left: 5px solid #8B4513;
+ }
+ .intro-section h2 {
+ color: #8B4513;
+ font-size: 1.8rem;
+ margin-bottom: 20px;
+ }
+ .intro-section p {
+ line-height: 1.8;
+ font-size: 1.1rem;
+ margin-bottom: 15px;
+ text-align: left;
+ }
+ .sns-section {
+ background: white;
+ padding: 45px 30px;
+ border-radius: 15px;
+ box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+ border-left: 5px solid #8B4513;
+ height: fit-content;
+ }
+ .sns-section h2 {
+ color: #8B4513;
+ font-size: 1.5rem;
+ margin-bottom: 20px;
+ text-align: center;
+ }
+ .sns-links {
+ display: flex;
+ flex-direction: column;
+ gap: 15px;
+ }
+ .sns-item {
+ display: flex;
+ align-items: center;
+ padding: 12px 15px;
+ background: #f8f8f8;
+ border-radius: 10px;
+ text-decoration: none;
+ color: #333;
+ transition: all 0.3s ease;
+ border: 2px solid transparent;
+ }
+ .sns-item:hover {
+ background: #8B4513;
+ color: white;
+ transform: translateX(5px);
+ border-color: #A0522D;
+ }
+ .sns-icon {
+ font-size: 1.2rem;
+ margin-right: 10px;
+ min-width: 30px;
+ }
+ .sns-text {
+ font-weight: 500;
+ font-size: 0.95rem;
+ }
+ .welcome-content {
+ background: white;
+ padding: 50px;
+ border-radius: 20px;
+ box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+ border-top: 6px solid #8B4513;
+ }
+ .welcome-content h3 {
+ color: #8B4513;
+ font-size: 2.5rem;
+ margin-bottom: 30px;
+ font-weight: bold;
+ }
+ .welcome-content p {
+ font-size: 1.3rem;
+ line-height: 2;
+ color: #555;
+ margin-bottom: 20px;
+ }
+ .category-page {
+ display: none;
+ }
+ .category-page.active {
+ display: block;
+ }
+ .category-title {
+ background: white;
+ padding: 25px;
+ border-radius: 15px;
+ box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+ margin-bottom: 30px;
+ text-align: center;
+ }
+ .category-title h2 {
+ color: #8B4513;
+ font-size: 2rem;
+ font-weight: bold;
+ }
+ .video-section {
+ background: white;
+ padding: 30px;
+ border-radius: 15px;
+ box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+ margin-bottom: 30px;
+ }
+ .video-section h3 {
+ color: #8B4513;
+ font-size: 1.4rem;
+ margin-bottom: 20px;
+ text-align: center;
+ }
+ .video-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 20px;
+ }
+ .video-container {
+ background: white;
+ padding: 15px;
+ border-radius: 15px;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+ transition: transform 0.3s ease;
+ position: relative;
+ }
+ .video-container:hover {
+ transform: translateY(-5px);
+ box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+ }
+ .video-container video {
+ width: 100%;
+ height: 320px;
+ border-radius: 10px;
+ object-fit: contain;
+ background: #f0f0f0;
+ }
+ .video-title {
+ text-align: center;
+ margin-top: 10px;
+ color: #8B4513;
+ font-weight: bold;
+ font-size: 0.95rem;
+ }
+ .video-loading {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background: rgba(139, 69, 19, 0.8);
+ color: white;
+ padding: 10px 15px;
+ border-radius: 20px;
+ font-size: 0.9rem;
+ display: none;
+ }
+ .video-placeholder {
+ background: #f0f0f0;
+ height: 320px;
+ border-radius: 10px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border: 2px dashed #ccc;
+ color: #666;
+ font-size: 1.1rem;
+ text-align: center;
+ position: relative;
+ overflow: hidden;
+ }
+ .video-placeholder::before {
+ content: '▶';
+ position: absolute;
+ font-size: 3rem;
+ color: #8B4513;
+ opacity: 0.3;
+ }
+ .image-gallery {
+ background: white;
+ padding: 30px;
+ border-radius: 15px;
+ box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+ }
+ .gallery-header {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 25px;
+ flex-wrap: wrap;
+ gap: 15px;
+ }
+ .gallery-title {
+ color: #8B4513;
+ font-size: 1.6rem;
+ font-weight: bold;
+ }
+ .gallery-pagination {
+ display: flex;
+ gap: 10px;
+ align-items: center;
+ }
+ .page-btn {
+ padding: 10px 20px;
+ background: #8B4513;
+ color: white;
+ border: none;
+ border-radius: 25px;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ font-weight: bold;
+ min-width: 80px;
+ font-family: 'Microsoft YaHei', 'Noto Sans SC', 'PingFang SC', Arial, sans-serif;
+ }
+ .page-btn:hover {
+ background: #A0522D;
+ transform: translateY(-2px);
+ }
+ .page-btn:disabled {
+ background: #ccc;
+ cursor: not-allowed;
+ transform: none;
+ }
+ .page-info {
+ color: #666;
+ font-weight: bold;
+ padding: 0 15px;
+ }
+ .image-grid {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 15px;
+ }
+ .image-placeholder {
+ background: #f8f8f8;
+ height: 320px;
+ border-radius: 10px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border: 2px solid #e0e0e0;
+ color: #666;
+ font-size: 0.9rem;
+ text-align: center;
+ transition: all 0.3s ease;
+ position: relative;
+ overflow: hidden;
+ }
+ .image-placeholder:hover {
+ border-color: #8B4513;
+ color: #8B4513;
+ transform: translateY(-3px);
+ box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+ }
+ .image-placeholder::before {
+ content: ' ';
+ position: absolute;
+ top: 10px;
+ right: 10px;
+ font-size: 1.5rem;
+ opacity: 0.3;
+ }
+ .back-to-top {
+ position: fixed;
+ bottom: 30px;
+ right: 30px;
+ background: #8B4513;
+ color: white;
+ border: none;
+ border-radius: 50%;
+ width: 50px;
+ height: 50px;
+ cursor: pointer;
+ font-size: 1.2rem;
+ transition: all 0.3s ease;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+ }
+ .back-to-top:hover {
+ background: #A0522D;
+ transform: translateY(-3px);
+ }
+ .footer {
+ background: linear-gradient(90deg, #8B4513, #A0522D);
+ color: white;
+ text-align: center;
+ padding: 30px 20px;
+ margin-top: 60px;
+ box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+ }
+ .footer-content {
+ max-width: 1200px;
+ margin: 0 auto;
+ line-height: 1.8;
+ }
+ .footer-info {
+ font-size: 1.1rem;
+ margin-bottom: 15px;
+ font-weight: 500;
+ }
+ .footer-copyright {
+ font-size: 0.9rem;
+ opacity: 0.8;
+ border-top: 1px solid rgba(255,255,255,0.2);
+ padding-top: 15px;
+ margin-top: 15px;
+ }
+ .footer a {
+ color: white;
+ text-decoration: none;
+ transition: opacity 0.3s ease;
+ }
+ .footer a:hover {
+ opacity: 0.8;
+ text-decoration: underline;
+ }
+ @media (max-width: 1200px) {
+ .header-content {
+ flex-direction: column;
+ gap: 20px;
+ }
+ .nav-menu {
+ width: 100%;
+ justify-content: center;
+ }
+ .nav-item {
+ font-size: 0.8rem;
+ padding: 8px 12px;
+ }
+ .video-container video {
+ height: 240px;
+ }
+ .video-placeholder {
+ height: 240px;
+ }
+ }
+ @media (max-width: 768px) {
+ .title {
+ font-size: 1.6rem;
+ }
+ .header-content {
+ padding: 0 15px;
+ }
+ .container {
+ padding: 20px 15px;
+ }
+ .intro-wrapper {
+ grid-template-columns: 1fr;
+ gap: 20px;
+ }
+ .intro-section {
+ padding: 25px;
+ }
+ .sns-section {
+ padding: 20px;
+ }
+ .sns-section h2 {
+ font-size: 1.3rem;
+ }
+ .welcome-content {
+ padding: 25px;
+ }
+ .nav-menu {
+ gap: 3px;
+ }
+ .nav-item {
+ font-size: 0.7rem;
+ padding: 6px 10px;
+ }
+ .video-grid {
+ grid-template-columns: 1fr;
+ gap: 15px;
+ }
+ .video-container video {
+ height: 200px !important;
+ }
+ .video-placeholder {
+ height: 200px;
+ }
+ .image-grid {
+ grid-template-columns: repeat(2, 1fr);
+ gap: 10px;
+ }
+ .image-placeholder {
+ height: 220px;
+ font-size: 0.8rem;
+ }
+ .gallery-header {
+ flex-direction: column;
+ align-items: stretch;
+ text-align: center;
+ }
+ .gallery-pagination {
+ justify-content: center;
+ }
+ .footer {
+ padding: 25px 15px;
+ }
+ .footer-info {
+ font-size: 1rem;
+ line-height: 1.6;
+ }
+ .footer-copyright {
+ font-size: 0.8rem;
+ }
+ }
+ @media (max-width: 480px) {
+ .title {
+ font-size: 1.4rem;
+ }
+ .home-icon {
+ font-size: 1.6rem;
+ padding: 8px;
+ }
+ .nav-item {
+ font-size: 0.6rem;
+ padding: 5px 8px;
+ }
+ .video-container video {
+ height: 170px !important;
+ }
+ .video-placeholder {
+ height: 170px;
+ }
+ .image-grid {
+ grid-template-columns: 1fr;
+ }
+ .page-btn {
+ padding: 8px 16px;
+ font-size: 0.9rem;
+ min-width: 70px;
+ }
+ }
+ /* ============ 东方艺术馆建筑图片样式 ============ */
+ .museum-building-section {
+ margin-top: 30px;
+ text-align: center;
+ }
+ .museum-building-img {
+ width: 100%;
+ max-width: 550px;
+ height: auto;
+ border-radius: 15px;
+ box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+ transition: transform 0.3s ease;
+ border: 2px solid #8B4513;
+ }
+ .museum-building-img:hover {
+ transform: scale(1.01);
+ box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+ }
+ @media (max-width: 768px) {
+ .museum-building-img {
+ max-width: 90%;
+ margin: 0 auto;
+ }
+ .museum-building-section {
+ margin-top: 20px;
+ }
+ }
+ </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="title-section">
-                <h1 class="title">동방예술관 소장유물 소개</h1>
-                <div class="home-icon" onclick="showMainPage()" title="홈으로">🏠</div>
-            </div>
-            <nav class="nav-menu">
-                <div class="nav-item" onclick="showCategory('goryeo-joseon')">1. 고려청자·조선백자</div>
-                <div class="nav-item" onclick="showCategory('buddha')">2. 불상</div>
-                <div class="nav-item" onclick="showCategory('hongshan-relics')">3. 홍산문화 관련</div>
-                <div class="nav-item" onclick="showCategory('arhat')">4. 18나한</div>
-                <div class="nav-item" onclick="showCategory('woodcraft')">5. 목기</div>
-                <div class="nav-item" onclick="showCategory('metal')">6. 청동·금동·은제</div>
-                <div class="nav-item" onclick="showCategory('pottery')">7. 토기·도기</div>
-                <div class="nav-item" onclick="showCategory('hongshan-text')">8. 홍산문화 문자옥기</div>
-                <div class="nav-item" onclick="showCategory('ceramic-brick')">9. 도기벽돌</div>
-            </nav>
-        </div>
-    </header>
+ <header class="header">
+ <div class="header-content">
+ <div class="title-section">
+ <h1 class="title">东方艺术馆馆藏文物介绍</h1>
+ <div class="home-icon" onclick="showMainPage()" title="返回首页"> </div>
+ </div>
+ <nav class="nav-menu">
+ <div class="nav-item" onclick="showCategory('goryeo-joseon')">1. 高丽青瓷·朝鲜白瓷</div>
+ <div class="nav-item" onclick="showCategory('buddha')">2. 佛像</div>
+ <div class="nav-item" onclick="showCategory('hongshan-relics')">3. 红山文化相关</div>
+ <div class="nav-item" onclick="showCategory('arhat')">4. 十八罗汉</div>
+ <div class="nav-item" onclick="showCategory('woodcraft')">5. 木器</div>
+ <div class="nav-item" onclick="showCategory('metal')">6. 青铜·鎏金·银制</div>
+ <div class="nav-item" onclick="showCategory('pottery')">7. 陶器·瓷器</div>
+ <div class="nav-item" onclick="showCategory('hongshan-text')">8. 红山文化文字玉器</div>
+ <div class="nav-item" onclick="showCategory('ceramic-brick')">9. 陶砖</div>
+ </nav>
+ </div>
+ </header>
+ <div class="container">
+ <!-- 主页 -->
+ <div id="main-page" class="main-page">
+ <div class="intro-wrapper">
+ <div class="intro-section">
+ <h2>🏛️ 东方艺术馆建设项目</h2>
+ <p><strong>承继曾在中国大连运营的高丽博物馆3,000余件馆藏文物，</strong></p>
+ <p>以<strong>「东方艺术馆」</strong>这一崭新名称重新建馆，是一项具有深远意义的文化传承项目。</p>
+ <p>📌 <strong>目标：</strong>通过众筹募集馆藏文物鉴定费用、图录制作费用及东方艺术馆建设基金</p>
+ <p>🤝 <strong>合作：</strong>与网络影响者、巡回展览赞助企业及文物鉴定机构深度联动</p>
+ <p>🏺 <strong>馆藏：</strong>推测为韩国古代文物的东方艺术馆馆藏珍品（共9大类别）</p>
+ <!-- 建筑图片区域 -->
+ <div class="museum-building-section">
+ <img src="./images/dongbang_intro.jpg" alt="东方艺术馆建设项目" class="museum-building-img">
+ </div>
+ </div>
+ <div class="sns-section">
+ <h2>🔗 东方艺术馆社交媒体</h2>
+ <div class="sns-links">
+ <a href="https://facebook.com/DongbangArtmuseum" target="_blank" class="sns-item facebook">
+ <span class="sns-icon">📘</span>
+ <span class="sns-text">Facebook</span>
+ </a>
+ <a href="https://instagram.com/dongbangartmuseum" target="_blank" class="sns-item instagram">
+ <span class="sns-icon">📷</span>
+ <span class="sns-text">Instagram</span>
+ </a>
+ <a href="https://blog.naver.com/dongbang_artmuseum" target="_blank" class="sns-item blog">
+ <span class="sns-icon">📝</span>
+ <span class="sns-text">博客</span>
+ </a>
+ <a href="https://www.youtube.com/@dongbang_artmuseum" target="_blank" class="sns-item youtube">
+ <span class="sns-icon">▶️</span>
+ <span class="sns-text">YouTube</span>
+ </a>
+ <a href="https://koreamuseum.modoo.link" target="_blank" class="sns-item website">
+ <span class="sns-icon">🌐</span>
+ <span class="sns-text">官方网站</span>
+ </a>
+ <a href="https://creator.tv.naver.com/channel/dongbangartmuseum/dashboard" target="_blank" class="sns-item navertv">
+ <span class="sns-icon">📺</span>
+ <span class="sns-text">Naver TV</span>
+ </a>
+ <a href="https://koreamuseum.modoo.link/inquiry" target="_blank" class="sns-item inquiry">
+ <span class="sns-icon">💬</span>
+ <span class="sns-text">在线咨询</span>
+ </a>
+ </div>
+ </div>
+ </div>
+ <div class="welcome-content">
+ <h3>🏺 东方艺术馆馆藏推测为韩国古代文物的珍品</h3>
+ <p>点击上方菜单，即可查看各类别馆藏珍品。</p>
+ <p>每个类别均提供3段相关视频及馆藏文物图片。</p>
+ <p>目前馆藏文物正在进行鉴定程序，</p>
+ <p>我们将通过本次众筹推进系统性鉴定与专业图录的制作工作。</p>
+ <a href="https://koreamuseum.modoo.link/picture" target="_blank" class="sns-item picture">
+ <span class="sns-icon">🔖</span>
+ <span class="sns-text">大连历代文物鉴定中心有限公司认证：点击此处可查看东方艺术馆部分馆藏文物的鉴定证书。</span>
+ </a>
+ </div>
+ </div>
 
-    <div class="container">
-        <!-- 메인 페이지 -->
-        <div id="main-page" class="main-page">
-            <div class="intro-wrapper">
-                <div class="intro-section">
-                    <h2>🏛️ 동방예술관 건립 프로젝트</h2>
-                    <p><strong>중국 대련에서 운영되던 고려박물관의 3,000여 점을 승계하여</strong></p>
-                    <p><strong>'동방예술관'</strong>이라는 새로운 이름으로 건립하는 의미있는 프로젝트입니다.</p>
-                    <p>📖 <strong>목표:</strong> 소장유물 검증비용, 도록 제작비용 및 동방예술관 건립기금 마련을 위한 크라우드펀딩</p>
-                    <p>🤝 <strong>협력:</strong> 인플루언서, 순환전시 스폰서 기업, 유물감정기관과의 연계</p>
-                    <p>🏺 <strong>소장품:</strong> 한국고대유물로 추정되는 동방예술관 소장예물 (9개 카테고리)</p>
-                   <!-- 이미지 섹션을 intro-section 안으로 이동 -->
-                    <div class="museum-building-section">
-                        <img src="./images/dongbang_intro.jpg" alt="동방예술관 건립 프로젝트" class="museum-building-img">
-                    </div>
-                </div>
-<!-- ============ 동방예술관 건물 이미지 추가 끝 ============ -->
-                
+ <!-- 1. 高丽青瓷·朝鲜白瓷 -->
+ <div id="goryeo-joseon-page" class="category-page">
+ <div class="category-title">
+ <h2>🏺 高丽青瓷·朝鲜白瓷</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/CQ-001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">高丽青瓷的历史与特征</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/CQ-006.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">朝鲜白瓷之美</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/CQ-007.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">陶瓷制作工艺解说</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">高丽青瓷·朝鲜白瓷馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('goryeo-joseon')" id="goryeo-joseon-prev">上一页</button>
+ <div class="page-info" id="goryeo-joseon-info">1 / 7</div>
+ <button class="page-btn" onclick="nextPage('goryeo-joseon')" id="goryeo-joseon-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="goryeo-joseon-gallery">
+ <!-- 图片由JavaScript动态生成 -->
+ </div>
+ </div>
+ </div>
 
-                <div class="sns-section">
-                    <h2>📱 동방예술관 SNS</h2>
-                    <div class="sns-links">
-                        <a href="https://facebook.com/DongbangArtmuseum" target="_blank" class="sns-item facebook">
-                            <span class="sns-icon">📘</span>
-                            <span class="sns-text">Facebook</span>
-                        </a>
-                        <a href="https://instagram.com/dongbangartmuseum" target="_blank" class="sns-item instagram">
-                            <span class="sns-icon">📷</span>
-                            <span class="sns-text">Instagram</span>
-                        </a>
-                        <a href="https://blog.naver.com/dongbang_artmuseum" target="_blank" class="sns-item blog">
-                            <span class="sns-icon">📝</span>
-                            <span class="sns-text">블로그</span>
-                        </a>
-                        <a href="https://www.youtube.com/@dongbang_artmuseum" target="_blank" class="sns-item youtube">
-                            <span class="sns-icon">📺</span>
-                            <span class="sns-text">YouTube</span>
-                        </a>
-                        <a href="https://koreamuseum.modoo.link" target="_blank" class="sns-item website">
-                            <span class="sns-icon">🌐</span>
-                            <span class="sns-text">홈페이지</span>
-                        </a>
-                        <a href="https://creator.tv.naver.com/channel/dongbangartmuseum/dashboard" target="_blank" class="sns-item navertv">
-                            <span class="sns-icon">📹</span>
-                            <span class="sns-text">Naver TV</span>
-                        </a>
-                        <!-- ============ SNS 섹션에 문의하기 추가 시작 ============ -->
-                        <a href="https://koreamuseum.modoo.link/inquiry" target="_blank" class="sns-item inquiry">
-                            <span class="sns-icon">💬</span>
-                            <span class="sns-text">1:1 문의하기</span>
-                        </a>
-<!-- ============ SNS 섹션에 문의하기 추가 끝 ============ -->
-                    </div>
-                </div>
-            </div>
+ <!-- 2. 佛像 -->
+ <div id="buddha-page" class="category-page">
+ <div class="category-title">
+ <h2>🙏 佛像</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/FX001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">佛像雕刻工艺</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/FX002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">各时代风格特征</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/FX003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">保存状况</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">佛像馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('buddha')" id="buddha-prev">上一页</button>
+ <div class="page-info" id="buddha-info">1 / 2</div>
+ <button class="page-btn" onclick="nextPage('buddha')" id="buddha-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="buddha-gallery"></div>
+ </div>
+ </div>
 
-            <div class="welcome-content">
-                <h3>🏺 한국고대유물로 추정되는 동방예술관 소장예물</h3>
-                <p>상단 메뉴를 클릭하시면 각 카테고리별 소장예물을 확인하실 수 있습니다.</p>
-                <p>각 카테고리마다 관련 동영상 3편과 소장예물 이미지들을 제공합니다.</p>
-                <p>현재 소장예물들은 검증 절차를 진행 중이며, 이번 크라우드펀딩을 통해</p>
-                <p>체계적인 검증과 전문적인 도록 제작을 추진하고자 합니다.</p>
-                <!-- ============大连历代文物鉴定中心有限公司 인증 추가 시작 0723============ -->
-                        <a href="https://koreamuseum.modoo.link/picture" target="_blank" class="sns-item picture">
-                            <span class="sns-icon">💬</span>
-                            <span class="sns-text">大连历代文物鉴定中心有限公司 인증 : 이곳을 누르면 동방예술관 소장유물 가운데 일부 유물들에 대한 인증서를 볼 수 있습니다.</span>
-                        </a>
-                <!-- ============ 大连历代文物鉴定中心有限公司 인증 추가 끝 ============ -->
-            </div>
-        </div>
+ <!-- 3. 红山文化相关 -->
+ <div id="hongshan-relics-page" class="category-page">
+ <div class="category-title">
+ <h2>🪨 红山文化相关（玉器、陶瓷、神像、陨石雕件、男根雕刻品等）</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/HS001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">红山文化概述</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/HS002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">玉器制作工艺</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/HS003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">文化意义</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">红山文化相关馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('hongshan-relics')" id="hongshan-relics-prev">上一页</button>
+ <div class="page-info" id="hongshan-relics-info">1 / 2</div>
+ <button class="page-btn" onclick="nextPage('hongshan-relics')" id="hongshan-relics-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="hongshan-relics-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 1. 고려청자·조선백자 -->
-        <div id="goryeo-joseon-page" class="category-page">
-            <div class="category-title">
-                <h2>🏺 고려청자·조선백자</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/CQ-001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">고려청자의 역사와 특징</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/CQ-006.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">조선백자의 아름다움</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/CQ-007.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">도자기 제작기법 해설</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">고려청자·조선백자 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('goryeo-joseon')" id="goryeo-joseon-prev">이전</button>
-                        <div class="page-info" id="goryeo-joseon-info">1 / 7</div>
-                        <button class="page-btn" onclick="nextPage('goryeo-joseon')" id="goryeo-joseon-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="goryeo-joseon-gallery">
-                    <!-- 이미지들이 JavaScript로 동적 생성됩니다 -->
-                </div>
-            </div>
-        </div>
+ <!-- 4. 十八罗汉 -->
+ <div id="arhat-page" class="category-page">
+ <div class="category-title">
+ <h2>🧘 十八罗汉</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/LH001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">十八罗汉的意义</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/LH002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">雕刻样式</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/LH003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">各罗汉介绍</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">十八罗汉馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('arhat')" id="arhat-prev">上一页</button>
+ <div class="page-info" id="arhat-info">1 / 2</div>
+ <button class="page-btn" onclick="nextPage('arhat')" id="arhat-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="arhat-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 2. 불상 -->
-        <div id="buddha-page" class="category-page">
-            <div class="category-title">
-                <h2>🙏 불상</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/FX001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">불상 조각기법</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/FX002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">시대별 특징</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/FX003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">보존 상태</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">불상 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('buddha')" id="buddha-prev">이전</button>
-                        <div class="page-info" id="buddha-info">1 / 2</div>
-                        <button class="page-btn" onclick="nextPage('buddha')" id="buddha-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="buddha-gallery"></div>
-            </div>
-        </div>
+ <!-- 5. 木器 -->
+ <div id="woodcraft-page" class="category-page">
+ <div class="category-title">
+ <h2>🪵 木器</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/MQ001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">传统木工艺</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/MQ002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">木材与工艺技法</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/MQ003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">按用途分类</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">木器馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('woodcraft')" id="woodcraft-prev">上一页</button>
+ <div class="page-info" id="woodcraft-info">1 / 1</div>
+ <button class="page-btn" onclick="nextPage('woodcraft')" id="woodcraft-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="woodcraft-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 3. 홍산문화 관련 -->
-        <div id="hongshan-relics-page" class="category-page">
-            <div class="category-title">
-                <h2>🗿 홍산문화 관련 (옥기, 도자기, 신상, 운석조각, 남근조각품 등)</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/HS001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">홍산문화 개요</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/HS002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">옥기 제작기법</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/HS003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">문화적 의미</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">홍산문화 관련 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('hongshan-relics')" id="hongshan-relics-prev">이전</button>
-                        <div class="page-info" id="hongshan-relics-info">1 / 2</div>
-                        <button class="page-btn" onclick="nextPage('hongshan-relics')" id="hongshan-relics-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="hongshan-relics-gallery"></div>
-            </div>
-        </div>
+ <!-- 6. 青铜·鎏金·银制 -->
+ <div id="metal-page" class="category-page">
+ <div class="category-title">
+ <h2>⚱️ 青铜·鎏金·银制</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/QT001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">金属工艺技法</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/QT002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">不同材料的特性</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/QT003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">纹样与装饰</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">青铜·鎏金·银制馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('metal')" id="metal-prev">上一页</button>
+ <div class="page-info" id="metal-info">1 / 5</div>
+ <button class="page-btn" onclick="nextPage('metal')" id="metal-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="metal-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 4. 18나한 -->
-        <div id="arhat-page" class="category-page">
-            <div class="category-title">
-                <h2>🧘 18나한</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/LH001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">18나한의 의미</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/LH002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">조각 양식</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/LH003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">개별 나한 소개</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">18나한 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('arhat')" id="arhat-prev">이전</button>
-                        <div class="page-info" id="arhat-info">1 / 2</div>
-                        <button class="page-btn" onclick="nextPage('arhat')" id="arhat-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="arhat-gallery"></div>
-            </div>
-        </div>
+ <!-- 7. 陶器·瓷器 -->
+ <div id="pottery-page" class="category-page">
+ <div class="category-title">
+ <h2>🏺 陶器·瓷器</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/TQ001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">陶器制作过程</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/TQ002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">瓷器发展史</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/TQ003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">纹样与造型</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">陶器·瓷器馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('pottery')" id="pottery-prev">上一页</button>
+ <div class="page-info" id="pottery-info">1 / 3</div>
+ <button class="page-btn" onclick="nextPage('pottery')" id="pottery-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="pottery-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 5. 목기 -->
-        <div id="woodcraft-page" class="category-page">
-            <div class="category-title">
-                <h2>🪵 목기</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/MQ001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">전통 목공예</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/MQ002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">목재 및 기법</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/MQ003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">용도별 분류</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">목기 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('woodcraft')" id="woodcraft-prev">이전</button>
-                        <div class="page-info" id="woodcraft-info">1 / 1</div>
-                        <button class="page-btn" onclick="nextPage('woodcraft')" id="woodcraft-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="woodcraft-gallery"></div>
-            </div>
-        </div>
+ <!-- 8. 红山文化文字玉器 -->
+ <div id="hongshan-text-page" class="category-page">
+ <div class="category-title">
+ <h2>📜 红山文化文字玉器</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/WZ001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">文字玉器概念</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/WZ002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">文字解读</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/WZ003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">历史意义</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">红山文化文字玉器馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('hongshan-text')" id="hongshan-text-prev">上一页</button>
+ <div class="page-info" id="hongshan-text-info">1 / 1</div>
+ <button class="page-btn" onclick="nextPage('hongshan-text')" id="hongshan-text-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="hongshan-text-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 6. 청동·금동·은제 -->
-        <div id="metal-page" class="category-page">
-            <div class="category-title">
-                <h2>⚱️ 청동·금동·은제</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/QT001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">금속공예 기법</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/QT002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">재료별 특성</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/QT003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">문양과 장식</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">청동·금동·은제 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('metal')" id="metal-prev">이전</button>
-                        <div class="page-info" id="metal-info">1 / 5</div>
-                        <button class="page-btn" onclick="nextPage('metal')" id="metal-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="metal-gallery"></div>
-            </div>
-        </div>
+ <!-- 9. 陶砖 -->
+ <div id="ceramic-brick-page" class="category-page">
+ <div class="category-title">
+ <h2>🧱 陶砖</h2>
+ </div>
+ <div class="video-section">
+ <h3>相关视频</h3>
+ <div class="video-grid">
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/TW001.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">陶砖制作</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/TW002.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">在建筑中的应用</div>
+ </div>
+ <div class="video-container">
+ <div class="video-loading">视频加载中...</div>
+ <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
+ <source src="./videos/TW003.mp4" type="video/mp4">
+ 您的浏览器不支持视频播放。
+ </video>
+ <div class="video-title">纹样与工艺</div>
+ </div>
+ </div>
+ </div>
+ <div class="image-gallery">
+ <div class="gallery-header">
+ <h3 class="gallery-title">陶砖馆藏珍品</h3>
+ <div class="gallery-pagination">
+ <button class="page-btn" onclick="prevPage('ceramic-brick')" id="ceramic-brick-prev">上一页</button>
+ <div class="page-info" id="ceramic-brick-info">1 / 1</div>
+ <button class="page-btn" onclick="nextPage('ceramic-brick')" id="ceramic-brick-next">下一页</button>
+ </div>
+ </div>
+ <div class="image-grid" id="ceramic-brick-gallery"></div>
+ </div>
+ </div>
 
-        <!-- 7. 토기·도기 -->
-        <div id="pottery-page" class="category-page">
-            <div class="category-title">
-                <h2>🏺 토기·도기</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/TQ001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">토기 제작과정</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/TQ002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">도기 발달사</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/TQ003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">문양과 형태</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">토기·도기 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('pottery')" id="pottery-prev">이전</button>
-                        <div class="page-info" id="pottery-info">1 / 3</div>
-                        <button class="page-btn" onclick="nextPage('pottery')" id="pottery-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="pottery-gallery"></div>
-            </div>
-        </div>
+ </div>
+ <footer class="footer">
+ <div class="footer-content">
+ <div class="footer-info">
+ <strong>东方艺术馆</strong> | 馆长 黄熙勉 | <a href="mailto:hjyeagle@naver.com">hjyeagle@naver.com</a>
+ </div>
+ <div class="footer-copyright">
+ Copyright(c) 2025 东方艺术馆 All rights reserved
+ </div>
+ </div>
+ </footer>
+ <button class="back-to-top" onclick="scrollToTop()" title="返回顶部">↑</button>
+ <script>
+ // 当前页面状态管理
+ const pageState = {
+ 'goryeo-joseon': { current: 1, total: 7 }, // 99张图片 = 7页
+ 'buddha': { current: 1, total: 2 }, // 24张图片 = 2页
+ 'hongshan-relics': { current: 1, total: 2 }, // 20张图片 = 2页
+ 'arhat': { current: 1, total: 2 }, // 18张图片 = 2页
+ 'woodcraft': { current: 1, total: 1 }, // 5张图片 = 1页
+ 'metal': { current: 1, total: 5 }, // 77张图片 = 5页
+ 'pottery': { current: 1, total: 3 }, // 34张图片 = 3页
+ 'hongshan-text': { current: 1, total: 1 }, // 10张图片 = 1页
+ 'ceramic-brick': { current: 1, total: 1 } // 6张图片 = 1页
+ };
 
-        <!-- 8. 홍산문화 문자옥기 -->
-        <div id="hongshan-text-page" class="category-page">
-            <div class="category-title">
-                <h2>📜 홍산문화 문자옥기</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/WZ001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">문자옥기 개념</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/WZ002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">문자 해석</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/WZ003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">역사적 의미</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">홍산문화 문자옥기 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('hongshan-text')" id="hongshan-text-prev">이전</button>
-                        <div class="page-info" id="hongshan-text-info">1 / 1</div>
-                        <button class="page-btn" onclick="nextPage('hongshan-text')" id="hongshan-text-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="hongshan-text-gallery"></div>
-            </div>
-        </div>
+ // 当前活动类别追踪
+ let currentCategory = null;
 
-        <!-- 9. 도기벽돌 -->
-        <div id="ceramic-brick-page" class="category-page">
-            <div class="category-title">
-                <h2>🧱 도기벽돌</h2>
-            </div>
-            
-            <div class="video-section">
-                <h3>관련 동영상</h3>
-                <div class="video-grid">
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/TW001.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">도기벽돌 제작</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/TW002.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">건축에서의 활용</div>
-                    </div>
-                    <div class="video-container">
-                        <div class="video-loading">동영상 로딩 중...</div>
-                        <video controls preload="metadata" onloadstart="showVideoLoading(this)" oncanplay="hideVideoLoading(this)" onerror="handleVideoError(this)">
-                            <source src="./videos/TW003.mp4" type="video/mp4">
-                            브라우저가 동영상을 지원하지 않습니다.
-                        </video>
-                        <div class="video-title">문양과 기법</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="image-gallery">
-                <div class="gallery-header">
-                    <h3 class="gallery-title">도기벽돌 소장예물</h3>
-                    <div class="gallery-pagination">
-                        <button class="page-btn" onclick="prevPage('ceramic-brick')" id="ceramic-brick-prev">이전</button>
-                        <div class="page-info" id="ceramic-brick-info">1 / 1</div>
-                        <button class="page-btn" onclick="nextPage('ceramic-brick')" id="ceramic-brick-next">다음</button>
-                    </div>
-                </div>
-                <div class="image-grid" id="ceramic-brick-gallery"></div>
-            </div>
-        </div>
-    </div>
+ // 视频加载相关函数
+ function showVideoLoading(videoElement) {
+ const container = videoElement.closest('.video-container');
+ const loadingDiv = container.querySelector('.video-loading');
+ if (loadingDiv) {
+ loadingDiv.style.display = 'block';
+ }
+ }
+ function hideVideoLoading(videoElement) {
+ const container = videoElement.closest('.video-container');
+ const loadingDiv = container.querySelector('.video-loading');
+ if (loadingDiv) {
+ loadingDiv.style.display = 'none';
+ }
+ }
+ function handleVideoError(videoElement) {
+ hideVideoLoading(videoElement);
+ const container = videoElement.closest('.video-container');
+ const videoTitle = container.querySelector('.video-title');
+ videoElement.style.display = 'none';
+ const placeholder = document.createElement('div');
+ placeholder.className = 'video-placeholder';
+ placeholder.innerHTML = `视频加载失败<br>🎬<br><small>请确认文件是否存在</small>`;
+ container.insertBefore(placeholder, videoTitle);
+ }
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <strong>동방예술관</strong> | 황희면 관장 | <a href="mailto:hjyeagle@naver.com">hjyeagle@naver.com</a>
-            </div>
-            <div class="footer-copyright">
-                Copyright(c) 2025 동방예술관 All rights reserved
-            </div>
-        </div>
-    </footer>
+ // 显示主页
+ function showMainPage() {
+ document.querySelectorAll('.category-page').forEach(page => {
+ page.classList.remove('active');
+ });
+ document.getElementById('main-page').style.display = 'block';
+ document.querySelectorAll('.nav-item').forEach(item => {
+ item.classList.remove('active');
+ });
+ currentCategory = null;
+ scrollToTop();
+ }
 
-    <button class="back-to-top" onclick="scrollToTop()" title="맨 위로">↑</button>
+ // 显示类别页面
+ function showCategory(category) {
+ document.getElementById('main-page').style.display = 'none';
+ document.querySelectorAll('.category-page').forEach(page => {
+ page.classList.remove('active');
+ });
+ document.getElementById(category + '-page').classList.add('active');
+ document.querySelectorAll('.nav-item').forEach(item => {
+ item.classList.remove('active');
+ });
+ const clickedNavs = document.querySelectorAll('.nav-item');
+ clickedNavs.forEach(nav => {
+ if (nav.onclick.toString().includes(category)) {
+ nav.classList.add('active');
+ }
+ });
+ currentCategory = category;
+ initializeGallery(category);
+ scrollToTop();
+ }
 
-    <script>
-        // 현재 페이지 상태 관리
-        const pageState = {
-            'goryeo-joseon': { current: 1, total: 7 },    // 99개 이미지 = 7페이지
-            'buddha': { current: 1, total: 2 },           // 24개 이미지 = 2페이지  
-            'hongshan-relics': { current: 1, total: 2 },  // 20개 이미지 = 2페이지
-            'arhat': { current: 1, total: 2 },            // 18개 이미지 = 2페이지
-            'woodcraft': { current: 1, total: 1 },        // 5개 이미지 = 1페이지
-            'metal': { current: 1, total: 5 },            // 77개 이미지 = 5페이지
-            'pottery': { current: 1, total: 3 },          // 34개 이미지 = 3페이지
-            'hongshan-text': { current: 1, total: 1 },    // 10개 이미지 = 1페이지
-            'ceramic-brick': { current: 1, total: 1 }     // 6개 이미지 = 1페이지
-        };
+ // 图库初始化
+ function initializeGallery(category) {
+ pageState[category].current = 1;
+ updateGallery(category);
+ }
 
-        // 현재 활성 카테고리 추적
-        let currentCategory = null;
+ // 更新图库
+ function updateGallery(category) {
+ const gallery = document.getElementById(category + '-gallery');
+ const currentPage = pageState[category].current;
+ const totalPages = pageState[category].total;
+ gallery.innerHTML = '';
+ const startIndex = (currentPage - 1) * 16;
 
-        // 동영상 로딩 관련 함수들
-        function showVideoLoading(videoElement) {
-            const container = videoElement.closest('.video-container');
-            const loadingDiv = container.querySelector('.video-loading');
-            if (loadingDiv) {
-                loadingDiv.style.display = 'block';
-            }
-        }
+ if (category === 'goryeo-joseon') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 99) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Goryeo_celadon_Korean_white_porcelain/CQ${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="高丽青瓷·朝鲜白瓷 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>CQ${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'buddha') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 24) {
+ let imageNumber;
+ if (imageIndex <= 9) {
+ imageNumber = String(imageIndex).padStart(3, '0');
+ } else {
+ imageNumber = String(imageIndex).padStart(4, '0');
+ }
+ const imagePath = `./images/Buddha_statue/FX${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="佛像 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>FX${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'hongshan-relics') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 20) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Hongsan_culture/HS${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="红山文化相关 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>HS${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'arhat') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 18) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/18Nahan/LH${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="十八罗汉 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>LH${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'woodcraft') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 5) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Wooden/MQ${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="木器 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>MQ${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'metal') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 77) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Gold_silver_copper/QT${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="青铜·鎏金·银制 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>QT${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'pottery') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 34) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Earthenware_pottery/TQ${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="陶器·瓷器 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>TQ${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'hongshan-text') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 10) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Hongsan_culture_letter_jade/WZ${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="红山文化文字玉器 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>WZ${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ } else if (category === 'ceramic-brick') {
+ for (let i = 1; i <= 16; i++) {
+ const imageIndex = startIndex + i;
+ const imageDiv = document.createElement('div');
+ imageDiv.className = 'image-placeholder';
+ if (imageIndex <= 6) {
+ const imageNumber = String(imageIndex).padStart(3, '0');
+ const imagePath = `./images/Pottery/TW${imageNumber}.jpg`;
+ imageDiv.innerHTML = `
+ <img src="${imagePath}" alt="陶砖 ${imageIndex}"
+ style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
+ onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+ onclick="openImageModal(this.src, this.alt)">
+ <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
+ 图片加载失败<br>🖼️<br>TW${imageNumber}
+ </div>`;
+ } else {
+ imageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">-</div>`;
+ }
+ gallery.appendChild(imageDiv);
+ }
+ }
 
-        function hideVideoLoading(videoElement) {
-            const container = videoElement.closest('.video-container');
-            const loadingDiv = container.querySelector('.video-loading');
-            if (loadingDiv) {
-                loadingDiv.style.display = 'none';
-            }
-        }
+ // 更新页面信息
+ document.getElementById(category + '-info').textContent = `${currentPage} / ${totalPages}`;
+ // 更新按钮状态
+ document.getElementById(category + '-prev').disabled = currentPage === 1;
+ document.getElementById(category + '-next').disabled = currentPage === totalPages;
+ }
 
-        function handleVideoError(videoElement) {
-            hideVideoLoading(videoElement);
-            const container = videoElement.closest('.video-container');
-            const videoTitle = container.querySelector('.video-title');
-            
-            // 비디오 엘리먼트를 플레이스홀더로 변경
-            videoElement.style.display = 'none';
-            
-            const placeholder = document.createElement('div');
-            placeholder.className = 'video-placeholder';
-            placeholder.innerHTML = `동영상 로딩 실패<br>📹<br><small>파일을 확인해주세요</small>`;
-            
-            container.insertBefore(placeholder, videoTitle);
-        }
+ // 图片模态框功能
+ function openImageModal(src, alt) {
+ const modal = document.createElement('div');
+ modal.style.cssText = `
+ position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+ background: rgba(0,0,0,0.8); z-index: 1000; display: flex;
+ align-items: center; justify-content: center; cursor: pointer;
+ padding: 20px; box-sizing: border-box;
+ `;
+ const img = document.createElement('img');
+ img.src = src;
+ img.alt = alt;
+ img.style.cssText = `
+ max-width: 100%; max-height: 100%; border-radius: 10px;
+ box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: default;
+ object-fit: contain;
+ `;
+ const closeBtn = document.createElement('div');
+ closeBtn.innerHTML = '✕';
+ closeBtn.style.cssText = `
+ position: absolute; top: 30px; right: 30px; color: white;
+ font-size: 2rem; cursor: pointer; background: rgba(0,0,0,0.5);
+ width: 40px; height: 40px; border-radius: 50%; display: flex;
+ align-items: center; justify-content: center; font-weight: bold;
+ `;
+ modal.appendChild(img);
+ modal.appendChild(closeBtn);
+ document.body.appendChild(modal);
+ modal.onclick = (e) => {
+ if (e.target === modal || e.target === closeBtn) {
+ modal.remove();
+ }
+ };
+ const handleEsc = (e) => {
+ if (e.key === 'Escape') {
+ modal.remove();
+ document.removeEventListener('keydown', handleEsc);
+ }
+ };
+ document.addEventListener('keydown', handleEsc);
+ }
 
-        // 메인 페이지 표시
-        function showMainPage() {
-            // 모든 카테고리 페이지 숨기기
-            document.querySelectorAll('.category-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            // 메인 페이지 표시
-            document.getElementById('main-page').style.display = 'block';
-            
-            // 네비게이션 메뉴 활성화 해제
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            currentCategory = null;
-            scrollToTop();
-        }
-
-        // 카테고리 페이지 표시
-        function showCategory(category) {
-            // 메인 페이지 숨기기
-            document.getElementById('main-page').style.display = 'none';
-            
-            // 모든 카테고리 페이지 숨기기
-            document.querySelectorAll('.category-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // 선택된 카테고리 페이지 표시
-            document.getElementById(category + '-page').classList.add('active');
-            
-            // 네비게이션 메뉴 활성화
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // 클릭된 메뉴 항목 찾아서 활성화
-            const clickedNavs = document.querySelectorAll('.nav-item');
-            clickedNavs.forEach(nav => {
-                if (nav.onclick.toString().includes(category)) {
-                    nav.classList.add('active');
-                }
-            });
-            
-            currentCategory = category;
-            
-            // 갤러리 초기화
-            initializeGallery(category);
-            scrollToTop();
-        }
-
-        // 갤러리 초기화
-        function initializeGallery(category) {
-            pageState[category].current = 1;
-            updateGallery(category);
-        }
-
-        // 갤러리 업데이트
-        function updateGallery(category) {
-            const gallery = document.getElementById(category + '-gallery');
-            const currentPage = pageState[category].current;
-            const totalPages = pageState[category].total;
-            
-            gallery.innerHTML = '';
-            const startIndex = (currentPage - 1) * 16;
-            
-            // 카테고리별 이미지 설정
-            if (category === 'goryeo-joseon') {
-                // 고려청자·조선백자 카테고리 (99개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 99) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Goryeo_celadon_Korean_white_porcelain/CQ${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="고려청자·조선백자 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>CQ${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'buddha') {
-                // 불상 카테고리 (24개 이미지) - 특수 넘버링 처리
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 24) {
-                        let imageNumber;
-                        if (imageIndex <= 9) {
-                            // 1-9번: FX001.jpg 형식 (3자리)
-                            imageNumber = String(imageIndex).padStart(3, '0');
-                        } else {
-                            // 10-24번: FX0010.jpg 형식 (4자리)
-                            imageNumber = String(imageIndex).padStart(4, '0');
-                        }
-                        
-                        const imagePath = `./images/Buddha_statue/FX${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="불상 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>FX${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'hongshan-relics') {
-                // 홍산문화 관련 카테고리 (20개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 20) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Hongsan_culture/HS${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="홍산문화 관련 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>HS${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'arhat') {
-                // 18나한 카테고리 (18개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 18) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/18Nahan/LH${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="18나한 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>LH${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'woodcraft') {
-                // 목기 카테고리 (5개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 5) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Wooden/MQ${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="목기 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>MQ${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'metal') {
-                // 청동·금동·은제 카테고리 (77개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 77) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Gold_silver_copper/QT${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="청동·금동·은제 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>QT${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'pottery') {
-                // 토기·도기 카테고리 (34개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 34) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Earthenware_pottery/TQ${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="토기·도기 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>TQ${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'hongshan-text') {
-                // 홍산문화 문자옥기 카테고리 (10개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 10) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Hongsan_culture_letter_jade/WZ${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="홍산문화 문자옥기 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>WZ${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            } else if (category === 'ceramic-brick') {
-                // 도기벽돌 카테고리 (6개 이미지)
-                for (let i = 1; i <= 16; i++) {
-                    const imageIndex = startIndex + i;
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'image-placeholder';
-                    
-                    if (imageIndex <= 6) {
-                        const imageNumber = String(imageIndex).padStart(3, '0');
-                        const imagePath = `./images/Pottery/TW${imageNumber}.jpg`;
-                        
-                        imageDiv.innerHTML = `
-                            <img src="${imagePath}" 
-                                 alt="도기벽돌 ${imageIndex}" 
-                                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: pointer;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                 onclick="openImageModal(this.src, this.alt)">
-                            <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; font-size: 0.8rem;">
-                                이미지 로딩 실패<br>📷<br>TW${imageNumber}
-                            </div>
-                        `;
-                    } else {
-                        imageDiv.innerHTML = `
-                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ddd; border: 2px dashed #ddd; border-radius: 10px;">
-                                -
-                            </div>
-                        `;
-                    }
-                    
-                    gallery.appendChild(imageDiv);
-                }
-            }
-            
-            // 페이지 정보 업데이트
-            document.getElementById(category + '-info').textContent = `${currentPage} / ${totalPages}`;
-            
-            // 버튼 상태 업데이트
-            document.getElementById(category + '-prev').disabled = currentPage === 1;
-            document.getElementById(category + '-next').disabled = currentPage === totalPages;
-        }
-
-        // 이미지 모달 기능
-        function openImageModal(src, alt) {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.8); z-index: 1000; display: flex; 
-                align-items: center; justify-content: center; cursor: pointer;
-                padding: 20px; box-sizing: border-box;
-            `;
-            
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = alt;
-            img.style.cssText = `
-                max-width: 100%; max-height: 100%; border-radius: 10px; 
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: default;
-                object-fit: contain;
-            `;
-            
-            const closeBtn = document.createElement('div');
-            closeBtn.innerHTML = '✕';
-            closeBtn.style.cssText = `
-                position: absolute; top: 30px; right: 30px; color: white; 
-                font-size: 2rem; cursor: pointer; background: rgba(0,0,0,0.5); 
-                width: 40px; height: 40px; border-radius: 50%; display: flex; 
-                align-items: center; justify-content: center; font-weight: bold;
-            `;
-            
-            modal.appendChild(img);
-            modal.appendChild(closeBtn);
-            document.body.appendChild(modal);
-            
-            // 클릭으로 닫기 (이미지 제외)
-            modal.onclick = (e) => {
-                if (e.target === modal || e.target === closeBtn) {
-                    modal.remove();
-                }
-            };
-            
-            // ESC 키로 닫기
-            const handleEsc = (e) => {
-                if (e.key === 'Escape') {
-                    modal.remove();
-                    document.removeEventListener('keydown', handleEsc);
-                }
-            };
-            document.addEventListener('keydown', handleEsc);
-        }
-
-        // 이전 페이지
-        function prevPage(category) {
-            if (pageState[category].current > 1) {
-                pageState[category].current--;
-                updateGallery(category);
-                scrollToGallery();
-            }
-        }
-
-        // 다음 페이지
-        function nextPage(category) {
-            if (pageState[category].current < pageState[category].total) {
-                pageState[category].current++;
-                updateGallery(category);
-                scrollToGallery();
-            }
-        }
-
-        // 갤러리로 스크롤
-        function scrollToGallery() {
-            document.querySelector('.image-gallery').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        // 맨 위로 스크롤
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // 페이지 로드 시 메인 페이지 표시
-        document.addEventListener('DOMContentLoaded', function() {
-            showMainPage();
-        });
-
-        // 뒤로가기 버튼 처리
-        window.addEventListener('popstate', function(event) {
-            showMainPage();
-        });
-    </script>
+ // 上一页
+ function prevPage(category) {
+ if (pageState[category].current > 1) {
+ pageState[category].current--;
+ updateGallery(category);
+ scrollToGallery();
+ }
+ }
+ // 下一页
+ function nextPage(category) {
+ if (pageState[category].current < pageState[category].total) {
+ pageState[category].current++;
+ updateGallery(category);
+ scrollToGallery();
+ }
+ }
+ // 滚动到图库
+ function scrollToGallery() {
+ document.querySelector('.image-gallery').scrollIntoView({
+ behavior: 'smooth',
+ block: 'start'
+ });
+ }
+ // 返回顶部
+ function scrollToTop() {
+ window.scrollTo({
+ top: 0,
+ behavior: 'smooth'
+ });
+ }
+ // 页面加载时显示主页
+ document.addEventListener('DOMContentLoaded', function() {
+ showMainPage();
+ });
+ // 处理浏览器后退按钮
+ window.addEventListener('popstate', function(event) {
+ showMainPage();
+ });
+ </script>
 </body>
 </html>
-
